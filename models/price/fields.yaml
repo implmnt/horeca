@@ -1,0 +1,36 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    name:
+        label: Name
+    description:
+        label: Description
+        type: textarea
+    images:
+        label: Images
+        type: fileupload
+        mode: image
+        imageHeight: 260
+        imageWidth: 260
+    tags:
+        label: Tags
+        type: tagfinder
+    ingredients:
+        label: Ingredients
+        type: textarea
+    portion:
+        label: Portion
+    is_new:
+        label: Novelty
+        type: checkbox
+    is_sale:
+        label: Special Offer
+        type: checkbox
+    cost:
+        label: Cost
+        type: number

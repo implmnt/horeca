@@ -1,0 +1,8 @@
+1.0.1: 
+    - First version of FoodCatalog
+    - create_firms_table.php
+    - create_tags_table.php
+    - create_prices_table.php
+    - create_nodes_table.php
+    - create_tables_table.php
+    - create_placements_table.php

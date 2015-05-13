@@ -1,0 +1,12 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+    users:
+        label: Users
+        type: relation
+        nameFrom: first_name

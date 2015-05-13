@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Node
+
+# Model Form Field configuration
+form: $/macrobit/foodcatalog/models/node/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\FoodCatalog\Models\Node
+
+# Default redirect location
+defaultRedirect: macrobit/foodcatalog/nodes
+
+# Create page
+create:
+    title: Create Node
+    redirect: macrobit/foodcatalog/nodes/update/:id
+    redirectClose: macrobit/foodcatalog/nodes
+
+# Update page
+update:
+    title: Edit Node
+    redirect: macrobit/foodcatalog/nodes
+    redirectClose: macrobit/foodcatalog/nodes
+
+# Preview page
+preview:
+    title: Preview Node

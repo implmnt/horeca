@@ -1,0 +1,17 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+users:
+    label: Users
+    view:
+        toolbarButtons: add|remove
+        list:
+            columns:
+                first_name: first Name
+                last_name: last Name
+                email: 
+                    label: e-mail
+                    searchable: true
+    manage:
+        showSearch: true

@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Table
+
+# Model Form Field configuration
+form: $/macrobit/foodcatalog/models/table/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\FoodCatalog\Models\Table
+
+# Default redirect location
+defaultRedirect: macrobit/foodcatalog/tables
+
+# Create page
+create:
+    title: Create Table
+    redirect: macrobit/foodcatalog/tables/update/:id
+    redirectClose: macrobit/foodcatalog/tables
+
+# Update page
+update:
+    title: Edit Table
+    redirect: macrobit/foodcatalog/tables
+    redirectClose: macrobit/foodcatalog/tables
+
+# Preview page
+preview:
+    title: Preview Table

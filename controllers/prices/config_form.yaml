@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Price
+
+# Model Form Field configuration
+form: $/macrobit/foodcatalog/models/price/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\FoodCatalog\Models\Price
+
+# Default redirect location
+defaultRedirect: macrobit/foodcatalog/prices
+
+# Create page
+create:
+    title: Create Price
+    redirect: macrobit/foodcatalog/prices/update/:id
+    redirectClose: macrobit/foodcatalog/prices
+
+# Update page
+update:
+    title: Edit Price
+    redirect: macrobit/foodcatalog/prices
+    redirectClose: macrobit/foodcatalog/prices
+
+# Preview page
+preview:
+    title: Preview Price

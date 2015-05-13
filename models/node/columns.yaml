@@ -1,0 +1,12 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+    tags:
+        label: Tags
+        type: partial
+        searchable: true
