@@ -1,6 +1,8 @@
 <?php namespace Macrobit\FoodCatalog\Models;
 
 use Model;
+use BackendAuth;
+use ApplicationException;
 
 /**
  * Firm Model
@@ -27,18 +29,32 @@ class Firm extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [
-        'users' => ['Backend\Models\User']
-    ];
+    public $hasMany = [];
     public $belongsTo = [];
     public $belongsToMany = [
-    //    'users' => ['Backend\Models\User', 'table' => 'macrobit_foodcatalog_firms_users'],
-        'nodes' => ['Macrobit\FoodCatalog\Models\Node', 'table' => 'macrobit_foodcatalog_node_firms']
+        'nodes' => ['Macrobit\FoodCatalog\Models\Node', 'table' => 'macrobit_foodcatalog_node_firms'],
+        'users' => ['Backend\Models\User', 'table' => 'macrobit_foodcatalog_firms_users']
     ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+
+    public function beforeSave()
+    {
+        $firms = self::all();
+        $modelUserIds = $this->users()->withDeferred($this->sessionKey)->lists('id');
+        foreach ($firms as $key => $firm) {
+            if ($this->id === $firm->id) continue;
+            $firmUserIds = $firm->users()->lists('id');
+            $ids = array_intersect($firmUserIds, $modelUserIds);
+            if (sizeof($ids) > 0)
+            {
+                throw new ApplicationException('Users[' . implode(', ', $ids) . '] already have firms');
+            }
+        }
+    }
 
 }

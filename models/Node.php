@@ -29,10 +29,11 @@ class Node extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'firm' => ['Macrobit\FoodCatalog\Models\Firm']
+    ];
     public $belongsToMany = [
-        'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_node_tags'],
-        'firms' => ['Macrobit\FoodCatalog\Models\Firm', 'table' => 'macrobit_foodcatalog_node_firms']
+        'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_node_tags']
     ];
     public $morphTo = [];
     public $morphOne = [];

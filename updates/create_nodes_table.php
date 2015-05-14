@@ -12,6 +12,7 @@ class CreateNodesTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('firm_id')->unsigned();
             $table->timestamps();
 
             // Fields for \October\Rain\Database\Traits\NestedTree
@@ -30,20 +31,12 @@ class CreateNodesTable extends Migration
             $table->primary(['node_id', 'tag_id']);
         });
 
-        Schema::create('macrobit_foodcatalog_node_firms', function($table)
-        {
-            $table->engine = 'InnoDB';
-            $table->integer('firm_id')->unsigned();
-            $table->integer('node_id')->unsigned();
-            $table->primary(['node_id', 'firm_id']);
-        });
     }
 
     public function down()
     {
         Schema::dropIfExists('macrobit_foodcatalog_nodes');
         Schema::dropIfExists('macrobit_foodcatalog_node_tags');
-        Schema::dropIfExists('macrobit_foodcatalog_node_firms');
     }
 
 }

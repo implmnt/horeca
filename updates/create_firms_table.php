@@ -22,22 +22,12 @@ class CreateFirmsTable extends Migration
             $table->integer('user_id');
         });
 
-        Schema::table('backend_users', function($table)
-        {
-            $table->engine = 'InnoDB';
-            $table->integer('firm_id')->unsigned();
-        });
-
     }
 
     public function down()
     {
         Schema::dropIfExists('macrobit_foodcatalog_firms_users');
         Schema::dropIfExists('macrobit_foodcatalog_firms');
-        Schema::table('backend_users', function($table)
-        {
-            $table->dropColumn('firm_id');
-        });
     }
 
 }

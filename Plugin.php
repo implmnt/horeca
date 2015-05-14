@@ -109,7 +109,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         User::extend(function($model) {
-            $model->belongsTo['firm'] = ['Macrobit\FoodCatalog\Models\Firm'];
+            $model->hasOne['firm'] = ['Macrobit\FoodCatalog\Models\Firm'];
         });
     }
 

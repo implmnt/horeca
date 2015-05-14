@@ -8,5 +8,5 @@ fields:
         disabled: true
     users:
         label: Users
-        type: relation
-        nameFrom: first_name
+        type: partial
+        path: users_field

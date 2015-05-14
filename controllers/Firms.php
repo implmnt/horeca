@@ -4,6 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 use Macrobit\FoodCatalog\Models\Firm;
 use BackendAuth;
+use ApplicationException;
 
 /**
  * Firms Back-end Controller
@@ -40,14 +41,14 @@ class Firms extends Controller
        }
     }    
 
-    // public function formExtendQuery($query)
-    // {
-    //    if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
-    //         $query->whereHas('users', function($q)
-    //         {
-    //             $q->where('id', '=', $this->user->id);
-    //         });  
-    //    }
-    // }
+    public function formExtendQuery($query)
+    {
+       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
+            $query->whereHas('users', function($q)
+            {
+                $q->where('id', '=', $this->user->id);
+            });  
+       }
+    }
 
 }
