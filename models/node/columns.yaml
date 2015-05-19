@@ -8,5 +8,9 @@ columns:
         searchable: true
     tags:
         label: Tags
-        type: partial
-        searchable: true
+        relation: tags
+        select: name
+    firm:
+        label: Firm
+        relation: firm
+        select: id

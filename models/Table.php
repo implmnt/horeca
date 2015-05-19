@@ -21,7 +21,23 @@ class Table extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'name'
+    ];
+
+    /**
+     * @var array Jsonable fields
+     */
+    protected $jsonable = [
+        'position'
+    ];
+
+    /**
+     * @var array Visible fields
+     */
+    protected $visible = [
+        'id', 'name', 'position'
+    ];
 
     /**
      * @var array Relations
@@ -35,5 +51,16 @@ class Table extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+    public function beforeCreate()
+    {
+        $this->position = ['top' => 0, 'left' => 0];
+    }
+
+    public function beforeSave()
+    {
+        if (is_string($this->position))
+            $this->position = json_decode($this->position);
+    }
 
 }

@@ -67,11 +67,6 @@ class TagFinder extends FormWidgetBase
     public function getSaveValue($value)
     {
         $tags = explode(',', $value);
-        // $ids = [];
-        // foreach ($tags as $key => $value) {
-        //     $tagId = TagModel::where('name', '=', $value)->get()[0]->id;
-        //     array_push($ids, $tagId);
-        // }
         return $tags;
     }
 
@@ -87,22 +82,6 @@ class TagFinder extends FormWidgetBase
             return $value;
         }
     }
-
-    // public function onTagNamesByIds($ids)
-    // {
-    //     $ids = Request::input('ids');
-    //     $ids = explode(',', $ids);
-    //     return json_encode(TagModel::find($ids)->lists('id', 'name'), JSON_UNESCAPED_UNICODE);
-    // }
-
-    // public function onTagsByQuery()
-    // {
-    //     $searchPattern = Request::input('query');
-
-    //     $tags = TagModel::where('name', 'like', $searchPattern . '%')->lists('id', 'name');
-
-    //     return json_encode($tags, JSON_UNESCAPED_UNICODE);
-    // }
 
     public function onFetchTags()
     {

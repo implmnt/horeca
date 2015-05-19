@@ -6,6 +6,21 @@ fields:
     id:
         label: ID
         disabled: true
+    name:
+        label: Name
+        searchable: true
+    address:
+        label: Address
+    phone:
+        label: Phone
+    url:
+        label: URL
+        preset:
+            field: slug
+            type: url
+    is_active:
+        label: Active
+        type: checkbox
     users:
         label: Users
         type: partial

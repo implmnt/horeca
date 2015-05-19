@@ -6,3 +6,4 @@
     - create_nodes_table.php
     - create_tables_table.php
     - create_placements_table.php
+    - seed_all_tables.php

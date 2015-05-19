@@ -14,7 +14,7 @@ class CreateTablesTable extends Migration
             $table->increments('id');
             $table->integer('placement_id');
             $table->string('name');
-            $table->json('properties');
+            $table->string('position');
             $table->timestamps();
         });
     }

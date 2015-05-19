@@ -1,6 +1,6 @@
 <?php namespace Macrobit\FoodCatalog\Models;
 
-use Model;
+use Model, BackendAuth;
 
 /**
  * Price Model
@@ -28,7 +28,9 @@ class Price extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'firm' => ['Macrobit\FoodCatalog\Models\Firm']
+    ];
     public $belongsToMany = [
         'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_price_tags']
     ];
@@ -39,5 +41,14 @@ class Price extends Model
     public $attachMany = [
         'images' => ['System\Models\File']
     ];
+
+    public function beforeCreate()
+    {
+        $user = BackendAuth::getUser();
+        if (!$user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
+        {
+            ($firm = $user->firm) != null && $this->firm_id = $user->firm->id;
+        }
+    }
 
 }

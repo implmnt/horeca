@@ -29,12 +29,14 @@ class Firm extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [];
-    public $belongsToMany = [
-        'nodes' => ['Macrobit\FoodCatalog\Models\Node', 'table' => 'macrobit_foodcatalog_node_firms'],
-        'users' => ['Backend\Models\User', 'table' => 'macrobit_foodcatalog_firms_users']
+    public $hasMany = [
+        'users' => ['Backend\Models\User'],
+        'nodes' => ['Macrobit\FoodCatalog\Models\Node'],
+        'prices' => ['Macrobit\FoodCatalog\Models\Price'],
+        'placements' => ['Macrobit\FoodCatalog\Models\Placement']
     ];
+    public $belongsTo = [];
+    public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];

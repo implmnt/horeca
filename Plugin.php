@@ -4,6 +4,8 @@ use System\Classes\PluginBase;
 use Backend;
 use Lang;
 use Backend\Models\User;
+use Backend\Models\UserGroup;
+use BackendAuth;
 
 /**
  * FoodCatalog Plugin Information File
@@ -85,8 +87,8 @@ class Plugin extends PluginBase
                         'order'         => 500
                     ],
                     'placements' => [
-                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.placementarranger'),
-                        'url'           =>  Backend::url('macrobit/foodcatalog/placementarranger'),
+                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.placements'),
+                        'url'           =>  Backend::url('macrobit/foodcatalog/placements'),
                         'icon'          =>  'icon-square',
                         'permissions'   =>  ['macrobit.foodcatalog.*'],
                         'order'         => 500
@@ -109,7 +111,22 @@ class Plugin extends PluginBase
     public function boot()
     {
         User::extend(function($model) {
-            $model->hasOne['firm'] = ['Macrobit\FoodCatalog\Models\Firm'];
+            $model->belongsTo['firm'] = ['Macrobit\FoodCatalog\Models\Firm'];
+            $model->addDynamicMethod('listGroupsForFirm', function()
+            {
+                $result = [];
+                $groups = null;
+                if (($user = BackendAuth::getUser()) && (!$user->hasAccess(['macrobit.foodcatalog.access_manage_firms'])))
+                {
+                    $groups = $user->groups;
+                } else {
+                    $groups = UserGroup::all();
+                }
+                foreach ($groups as $group) {
+                    $result[$group->id] = [$group->name, $group->description];
+                }
+                return $result;
+            });
         });
     }
 

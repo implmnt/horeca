@@ -9,6 +9,3 @@ fields:
     tags:
         label: Tags
         type: tagfinder
-    parent_id:
-        label: Parent
-        type: dropdown

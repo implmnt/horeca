@@ -1,0 +1,13 @@
+<div 
+    id="tables-arranger" 
+    data-control="tablesarranger" 
+    data-width="<?= $placement->width ?>"
+    data-height="<?= $placement->height ?>" 
+    class="tables-arranger">
+        <?php foreach ($tables as $table): ?>
+            <div class="tables-arranger-table">
+                <span><?= $table->name ?></span>
+                <input name="tables[]" value='<?= $table ?>' hidden>
+            </div>
+        <?php endforeach ?>
+</div>

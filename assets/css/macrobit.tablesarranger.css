@@ -1,0 +1,8 @@
+.tables-arranger {
+    position: relative;
+    border: 2px solid black;
+}
+
+.tables-arranger-table {
+    position: absolute;
+}

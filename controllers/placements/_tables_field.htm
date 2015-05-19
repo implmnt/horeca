@@ -1,0 +1,8 @@
+<div>
+    <div>
+        <?= $this->relationRender('tables') ?>
+    </div>
+    <div id="tables-arranger-container">
+        <?= $this->makePartial('tables_arranger', ['tables' => $tables]) ?>
+    </div>
+</div>

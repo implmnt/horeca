@@ -27,7 +27,8 @@ showSetup: true
 showSorting: true
 
 # Displays the tree view
-showTree: true
+showTree: false
+showCheckboxes: true
 
 # Default sorting column
 # defaultSort:

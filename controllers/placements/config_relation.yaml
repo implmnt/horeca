@@ -1,0 +1,13 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+tables:
+    label: Tables
+    view:
+        toolbarButtons: create|delete
+        list: $/macrobit/foodcatalog/models/table/columns.yaml
+    manage:
+        showSearch: true
+        list: $/macrobit/foodcatalog/models/table/columns.yaml
+        form: $/macrobit/foodcatalog/models/table/fields.yaml

@@ -12,8 +12,10 @@ class CreatePlacementsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('firm_id')->unsigned()->nullable();
             $table->string('name');
-            $table->json('properties');
+            $table->integer('height')->default('300');
+            $table->integer('width')->default('500');
             $table->timestamps();
         });
     }

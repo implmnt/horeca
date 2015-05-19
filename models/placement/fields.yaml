@@ -3,6 +3,30 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
+
+tabs:
+    fields:
+        id:
+            label: ID
+            disabled: true
+            hidden: true
+            tab: Placement
+        name:
+            label: Name
+            tab: Placement
+        height:
+            label: Height
+            default: 300
+            span: left
+            tab: Placement
+        width:
+            label: Width
+            default: 500
+            span: right
+            tab: Placement
+        tables:
+            label: Tables
+            type: partial
+            path: tables_field
+            tab: Tables
+            context: [update]

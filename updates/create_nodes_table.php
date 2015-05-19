@@ -12,15 +12,12 @@ class CreateNodesTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('firm_id')->unsigned();
+            $table->integer('firm_id')->unsigned()->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->integer('nest_left')->nullable();
+            $table->integer('nest_right')->nullable();
+            $table->integer('nest_depth')->nullable();
             $table->timestamps();
-
-            // Fields for \October\Rain\Database\Traits\NestedTree
-            $table->integer('parent_id')->default(0)->unsigned()->index();
-            $table->integer('nest_left')->default(0);
-            $table->integer('nest_right')->default(0);
-            $table->integer('nest_depth')->default(0);
-
         });
 
         Schema::create('macrobit_foodcatalog_node_tags', function($table)

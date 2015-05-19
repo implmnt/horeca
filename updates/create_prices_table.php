@@ -12,7 +12,7 @@ class CreatePricesTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->integer('firm_id')->unsigned();
+            $table->integer('firm_id')->unsigned()->nullable();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('ingredients')->nullable();

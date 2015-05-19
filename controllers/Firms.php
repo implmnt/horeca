@@ -1,10 +1,9 @@
 <?php namespace Macrobit\FoodCatalog\Controllers;
 
-use BackendMenu;
+use BackendMenu, Redirect, Flash, View, Response;
 use Backend\Classes\Controller;
 use Macrobit\FoodCatalog\Models\Firm;
-use BackendAuth;
-use ApplicationException;
+use Macrobit\FoodCatalog\Classes\AccessService;
 
 /**
  * Firms Back-end Controller
@@ -28,7 +27,16 @@ class Firms extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Macrobit.FoodCatalog', 'foodcatalog', 'firms');
+    }
 
+    public function index()
+    {
+        if (AccessService::noFirmsAssigned()) 
+            return Response::make(View::make('macrobit.foodcatalog::no_firm_assigned'), 403);
+        else if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
+            return Redirect::to('backend/macrobit/foodcatalog/firms/update/' . $this->user->firm->id);
+
+        $this->asExtension('ListController')->index();
     }
 
     public function listExtendQuery($query)

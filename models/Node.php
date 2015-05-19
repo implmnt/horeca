@@ -1,6 +1,7 @@
 <?php namespace Macrobit\FoodCatalog\Models;
 
 use Model;
+use BackendAuth;
 
 /**
  * Node Model
@@ -41,15 +42,13 @@ class Node extends Model
     public $attachOne = [];
     public $attachMany = [];
 
-    public function getParentIdOptions()
+    public function beforeCreate()
     {
-        $result = [];
-        $result[0] = 'ROOT';
-        $nodes = Node::all();
-        foreach ($nodes as $node) {
-            $result[$node->id] = implode(', ', $node->tags->lists('name'));
+        $user = BackendAuth::getUser();
+        if (!$user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
+        {
+            ($firm = $user->firm) != null && $this->firm_id = $user->firm->id;
         }
-        return $result;
     }
 
 }

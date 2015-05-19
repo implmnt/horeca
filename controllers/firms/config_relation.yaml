@@ -5,7 +5,7 @@
 users:
     label: Users
     view:
-        toolbarButtons: add|remove
+        toolbarButtons: create|delete
         list:
             columns:
                 first_name: first Name
@@ -15,3 +15,5 @@ users:
                     searchable: true
     manage:
         showSearch: true
+        list: ~/modules/backend/models/user/columns.yaml
+        form: users_fields.yaml
