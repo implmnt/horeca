@@ -9,15 +9,22 @@ fields:
     name:
         label: Name
         searchable: true
-    address:
-        label: Address
-    phone:
-        label: Phone
+        span: left
     url:
         label: URL
-        preset:
-            field: slug
-            type: url
+        span: right
+    address:
+        label: Address
+        span: left
+    phone:
+        label: Phone
+        span: right
+    tags:
+        label: Tags
+        type: tagfinder
+    day_activity_period:
+        label: Activity Period
+        type: mc-rangeslider
     is_active:
         label: Active
         type: checkbox

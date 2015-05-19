@@ -11,6 +11,7 @@ fields:
     description:
         label: Description
         type: textarea
+        size: tiny
     images:
         label: Images
         type: fileupload
@@ -23,14 +24,17 @@ fields:
     ingredients:
         label: Ingredients
         type: textarea
+        size: tiny
     portion:
         label: Portion
+        span: left
+    cost:
+        label: Cost
+        type: number
+        span: right
     is_new:
         label: Novelty
         type: checkbox
     is_sale:
         label: Special Offer
         type: checkbox
-    cost:
-        label: Cost
-        type: number

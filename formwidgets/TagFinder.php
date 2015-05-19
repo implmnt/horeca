@@ -1,7 +1,6 @@
 <?php namespace Macrobit\FoodCatalog\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
-use Macrobit\FoodCatalog\Models\Tag as TagModel;
 use Request;
 
 /**
@@ -16,20 +15,20 @@ class TagFinder extends FormWidgetBase
     protected $defaultAlias = 'macrobit_foodcatalog_tag_finder';
 
     /**
+     * [$models description]
+     * @var the name of function which allows to get models
+     */
+    public $models = null;
+
+    /**
      * {@inheritDoc}
      */
     public function init()
     {
+        $this->fillFromConfig([
+            'models'
+        ]);
     }
-
-    public function widgetDetails()
-    {
-        return [
-            'name'        => 'Tag Finder',
-            'description' => 'Renders a tag finder field.'
-        ];
-    }
-
 
     /**
      * {@inheritDoc}
@@ -56,8 +55,8 @@ class TagFinder extends FormWidgetBase
     public function loadAssets()
     {
         $this->addCss('vendor/magicsuggest/magicsuggest-min.css', 'Macrobit.FoodCatalog');
-        $this->addCss('css/tagfinder.css', 'Macrobit.FoodCatalog');
         $this->addJs('vendor/magicsuggest/magicsuggest-min.js', 'Macrobit.FoodCatalog');
+        $this->addCss('css/tagfinder.css', 'Macrobit.FoodCatalog');
         $this->addJs('js/tagfinder.js', 'Macrobit.FoodCatalog');
     }
 
@@ -85,7 +84,7 @@ class TagFinder extends FormWidgetBase
 
     public function onFetchTags()
     {
-        return json_encode(TagModel::all()->lists('id', 'name'), JSON_UNESCAPED_UNICODE);
+        return json_encode($this->model->getTagOptions()->lists('id', 'name'), JSON_UNESCAPED_UNICODE);
     }
 
 }

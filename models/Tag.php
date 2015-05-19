@@ -31,7 +31,8 @@ class Tag extends Model
     public $belongsTo = [];
     public $belongsToMany = [
         'prices' => ['Macrobit\FoodCatalog\Models\Price', 'table' => 'macrobit_foodcatalog_price_tags'],
-        'nodes' => ['Macrobit\FoodCatalog\Models\Node', 'table' => 'macrobit_foodcatalog_node_tags']
+        'nodes' => ['Macrobit\FoodCatalog\Models\Node', 'table' => 'macrobit_foodcatalog_node_tags'],
+        'firms' => ['Macrobit\FoodCatalog\Models\Firm', 'table' => 'macrobit_foodcatalog_firm_tags']
     ];
     public $morphTo = [];
     public $morphOne = [];

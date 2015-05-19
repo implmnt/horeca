@@ -1,7 +1,7 @@
 <?php namespace Macrobit\FoodCatalog\Models;
 
-use Model;
-use BackendAuth;
+use Model, BackendAuth;
+use Macrobit\FoodCatalog\Models\Tag as TagModel;
 
 /**
  * Node Model
@@ -51,4 +51,8 @@ class Node extends Model
         }
     }
 
+    public function getTagOptions()
+    {
+        return TagModel::where('type', '=', 'price');
+    }
 }

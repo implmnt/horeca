@@ -9,3 +9,5 @@ columns:
     name:
         label: Name
         searchable: true
+    type:
+        label: Type

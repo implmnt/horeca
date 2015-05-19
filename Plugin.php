@@ -104,6 +104,10 @@ class Plugin extends PluginBase
             'Macrobit\FoodCatalog\FormWidgets\TagFinder' => [
                 'label' => 'Tag Finder',
                 'code' => 'tagfinder'
+            ],
+            'Macrobit\FoodCatalog\FormWidgets\McRangeSlider' => [
+                'label' => 'Range Slider',
+                'code' => 'mc-rangeslider'
             ]
         ];
     }

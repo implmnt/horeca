@@ -8,3 +8,9 @@ fields:
         disabled: true
     name:
         label: Name
+    type:
+        label: Type
+        type: dropdown
+        options:
+            price: Price
+            firm: Firm

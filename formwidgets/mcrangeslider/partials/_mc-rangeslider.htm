@@ -1,0 +1,27 @@
+<?php if ($this->previewMode): ?>
+
+    <div class="form-control">
+        <?= $value['from'] . '-' . $value['to'] ?>
+    </div>
+
+<?php else: ?>
+
+    <div 
+        data-control="mc-rangeslider"
+    <?php if ($value): ?>
+        data-from="<?= $value['from'] ?>" 
+        data-to="<?= $value['to'] ?>"
+    <?php endif ?>
+        class="mc-rangeslider">
+        <input
+            type="text"
+            name="<?= $name ?>[from]" 
+            class="mc-rangeslider-lower form-control">
+        <div class="mc-rangeslider-slider"></div>
+        <input 
+            type="text" 
+            name="<?= $name ?>[to]"
+            class="mc-rangeslider-upper form-control">
+    </div>
+
+<?php endif ?>

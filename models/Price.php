@@ -1,6 +1,7 @@
 <?php namespace Macrobit\FoodCatalog\Models;
 
 use Model, BackendAuth;
+use Macrobit\FoodCatalog\Models\Tag as TagModel;
 
 /**
  * Price Model
@@ -49,6 +50,11 @@ class Price extends Model
         {
             ($firm = $user->firm) != null && $this->firm_id = $user->firm->id;
         }
+    }
+
+    public function getTagOptions()
+    {
+        return TagModel::where('type', '=', 'price');
     }
 
 }

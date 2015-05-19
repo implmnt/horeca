@@ -1,8 +1,7 @@
 <?php namespace Macrobit\FoodCatalog\Models;
 
-use Model;
-use BackendAuth;
-use ApplicationException;
+use Model, BackendAuth, ApplicationException;
+use Macrobit\FoodCatalog\Models\Tag as TagModel;
 
 /**
  * Firm Model
@@ -26,6 +25,13 @@ class Firm extends Model
     protected $fillable = [];
 
     /**
+     * @var array Jsonable fields
+     */
+    protected $jsonable = [
+        'day_activity_period'
+    ];
+
+    /**
      * @var array Relations
      */
     public $hasOne = [];
@@ -36,7 +42,9 @@ class Firm extends Model
         'placements' => ['Macrobit\FoodCatalog\Models\Placement']
     ];
     public $belongsTo = [];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+        'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_firm_tags']
+    ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
@@ -58,5 +66,11 @@ class Firm extends Model
             }
         }
     }
+
+    public function getTagOptions()
+    {
+        return TagModel::where('type', '=', 'firm');
+    }
+
 
 }

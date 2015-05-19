@@ -8,12 +8,16 @@ class SeedAllTables extends Seeder
     public function run()
     {
         Tag::insert([
-            ['name' => 'red'],
-            ['name' => 'white'],
-            ['name' => 'black'],
-            ['name' => 'blue'],
-            ['name' => 'green'],
-            ['name' => 'yellow']
+            ['type' => 'price', 'name' => 'Закуски'],
+            ['type' => 'price', 'name' => 'Салаты'],
+            ['type' => 'price', 'name' => 'Напитки'],
+            ['type' => 'price', 'name' => 'Вегетарианское'],
+            ['type' => 'price', 'name' => 'Газированные'],
+            ['type' => 'price', 'name' => 'Диетические'],
+            ['type' => 'firm', 'name' => 'Ресторан'],
+            ['type' => 'firm', 'name' => 'Кафе'],
+            ['type' => 'firm', 'name' => 'Бар'],
+            ['type' => 'firm', 'name' => 'Клуб']
         ]);
     }
 }
