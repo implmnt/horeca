@@ -7,6 +7,9 @@ use Model;
  */
 class Tag extends Model
 {
+    use \Macrobit\FoodCatalog\Traits\Restable;
+
+    public static $REST_PATH_NAME = 'tags';
 
     /**
      * @var string The database table used by the model.
@@ -21,7 +24,10 @@ class Tag extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'type'
+    ];
 
     /**
      * @var array Relations

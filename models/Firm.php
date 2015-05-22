@@ -8,6 +8,9 @@ use Macrobit\FoodCatalog\Models\Tag as TagModel;
  */
 class Firm extends Model
 {
+    use \Macrobit\FoodCatalog\Traits\Restable;
+
+    public static $REST_PATH_NAME = 'firms';
 
     /**
      * @var string The database table used by the model.
@@ -22,7 +25,14 @@ class Firm extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'url',
+        'address',
+        'phone',
+        'day_activity_period',
+        'is_active'
+    ];
 
     /**
      * @var array Jsonable fields
@@ -48,7 +58,9 @@ class Firm extends Model
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
-    public $attachOne = [];
+    public $attachOne = [
+        'image' => ['System\Models\File']
+    ];
     public $attachMany = [];
 
 
@@ -69,7 +81,7 @@ class Firm extends Model
 
     public function getTagOptions()
     {
-        return TagModel::where('type', '=', 'firm');
+        return TagModel::where('type', '=', 'firm')->get();
     }
 
 

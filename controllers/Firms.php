@@ -10,6 +10,7 @@ use Macrobit\FoodCatalog\Classes\AccessService;
  */
 class Firms extends Controller
 {
+
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',

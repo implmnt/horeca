@@ -19,12 +19,22 @@ fields:
     phone:
         label: Phone
         span: right
-    tags:
-        label: Tags
-        type: tagfinder
     day_activity_period:
         label: Activity Period
         type: mc-rangeslider
+        step: 15
+        margin: 60
+        span: left
+    tags:
+        label: Tags
+        type: mc-tagfinder
+        span: right
+    image:
+        label: Image
+        type: fileupload
+        mode: image
+        imageHeight: 260
+        imageWidth: 260
     is_active:
         label: Active
         type: checkbox

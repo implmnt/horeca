@@ -24,6 +24,26 @@ class Tables extends Controller
         BackendMenu::setContext('Macrobit.FoodCatalog', 'foodcatalog', 'tables');
     }
 
+    public function listExtendQuery($query)
+    {
+       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
+            $query->whereHas('firm', function($q)
+            {
+                $q->where('id', '=', $this->user->firm->id);   
+            });
+       }
+    }
+
+    public function formExtendQuery($query)
+    {
+       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
+            $query->whereHas('firm', function($q)
+            {
+                $q->where('id', '=', $this->user->firm->id);   
+            });
+       }
+    }
+
     public function index()
     {
        if (AccessService::noFirmsAssigned()) 

@@ -15,10 +15,25 @@ class McRangeSlider extends FormWidgetBase
     protected $defaultAlias = 'macrobit_foodcatalog_mc-range_slider';
 
     /**
+     * [$margin, $step, $min, $max description]
+     * @var field properties
+     */
+    public $margin = 60;
+    public $step = 15;
+    public $min = 0;
+    public $max = 1440;
+
+    /**
      * {@inheritDoc}
      */
     public function init()
     {
+        $this->fillFromConfig([
+            'margin',
+            'step',
+            'min',
+            'max'
+        ]);
     }
 
     /**
@@ -38,6 +53,10 @@ class McRangeSlider extends FormWidgetBase
         $this->vars['name'] = $this->formField->getName();
         $this->vars['value'] = $this->getLoadValue();
         $this->vars['model'] = $this->model;
+        $this->vars['margin'] = $this->margin;
+        $this->vars['step'] = $this->step;
+        $this->vars['min'] = $this->min;
+        $this->vars['max'] = $this->max;
     }
 
     /**

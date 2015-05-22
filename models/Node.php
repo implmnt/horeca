@@ -53,6 +53,6 @@ class Node extends Model
 
     public function getTagOptions()
     {
-        return TagModel::where('type', '=', 'price');
+        return TagModel::where('type', '=', 'price')->get();
     }
 }

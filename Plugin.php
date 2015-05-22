@@ -1,11 +1,12 @@
 <?php namespace Macrobit\FoodCatalog;
 
-use System\Classes\PluginBase;
-use Backend;
 use Lang;
+use Backend;
+use BackendAuth;
 use Backend\Models\User;
 use Backend\Models\UserGroup;
-use BackendAuth;
+use System\Classes\PluginBase;
+use Macrobit\FoodCatalog\Classes\RestHelper;
 
 /**
  * FoodCatalog Plugin Information File
@@ -101,14 +102,21 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            'Macrobit\FoodCatalog\FormWidgets\TagFinder' => [
+            'Macrobit\FoodCatalog\FormWidgets\McTagFinder' => [
                 'label' => 'Tag Finder',
-                'code' => 'tagfinder'
+                'code' => 'mc-tagfinder'
             ],
             'Macrobit\FoodCatalog\FormWidgets\McRangeSlider' => [
                 'label' => 'Range Slider',
                 'code' => 'mc-rangeslider'
             ]
+        ];
+    }
+
+    public function registerComponents()
+    {
+        return [
+            '\Macrobit\FoodCatalog\Components\FirmList' => 'firmList'
         ];
     }
 
@@ -132,6 +140,11 @@ class Plugin extends PluginBase
                 return $result;
             });
         });
+
+        RestHelper::init([
+            'Macrobit\FoodCatalog\Models\Firm',
+            'Macrobit\FoodCatalog\Models\Tag'
+        ]);
     }
 
 }

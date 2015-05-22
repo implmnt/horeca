@@ -20,7 +20,7 @@ fields:
         imageWidth: 260
     tags:
         label: Tags
-        type: tagfinder
+        type: mc-tagfinder
     ingredients:
         label: Ingredients
         type: textarea

@@ -1,0 +1,30 @@
+<div class="rests">
+    <div class="pagination">
+        <ul>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+        </ul>
+        <span>Всего 18</span>
+    </div>
+    <ul class="items wrap left-xl">
+        {% for item in items %}
+            <li class="col-1 xl-3-12 md-4-12 s-2-12">
+                <div class="image">
+                    <a href="#"><img src="{{ item.image.path }}" alt="image1"></a>
+                </div>
+                <div class="desc">
+                    <span>{{ item.tags }}</span>
+                    <h3><a href="#">{{ item.name }}</a></h3>
+                    <a href="tel:+78007077001" class="tel">{{ item.phone }}</a>
+                    <div class="address">{{ item.address }}</div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

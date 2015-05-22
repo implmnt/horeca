@@ -8,4 +8,4 @@ fields:
         disabled: true
     tags:
         label: Tags
-        type: tagfinder
+        type: mc-tagfinder

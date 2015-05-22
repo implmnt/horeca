@@ -38,6 +38,26 @@ class Placements extends Controller
         $this->addJs('/plugins/macrobit/foodcatalog/assets/js/macrobit.tablesarranger.js');
     }
 
+    public function listExtendQuery($query)
+    {
+       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
+            $query->whereHas('firm', function($q)
+            {
+                $q->where('id', '=', $this->user->firm->id);   
+            });
+       }
+    }
+
+    public function formExtendQuery($query)
+    {
+       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
+            $query->whereHas('firm', function($q)
+            {
+                $q->where('id', '=', $this->user->firm->id);   
+            });
+       }
+    }
+
     public function update($recordId, $context = null)
     {
         if (AccessService::noFirmsAssigned()) 

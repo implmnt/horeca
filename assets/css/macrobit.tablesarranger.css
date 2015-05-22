@@ -5,4 +5,9 @@
 
 .tables-arranger-table {
     position: absolute;
+	padding: 5px;
+	border: 1px solid #DDD;
+	font-size: 12px;
+	cursor: pointer;
+	background: #FFF;
 }

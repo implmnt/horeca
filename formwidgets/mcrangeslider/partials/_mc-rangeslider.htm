@@ -12,16 +12,20 @@
         data-from="<?= $value['from'] ?>" 
         data-to="<?= $value['to'] ?>"
     <?php endif ?>
+        data-margin="<?= $margin ?>"
+        data-step="<?= $step ?>"
+        data-min="<?= $min ?>"
+        data-max="<?= $max ?>"
         class="mc-rangeslider">
         <input
             type="text"
             name="<?= $name ?>[from]" 
-            class="mc-rangeslider-lower form-control">
+            class="mc-rangeslider-input mc-rangeslider-lower">
         <div class="mc-rangeslider-slider"></div>
         <input 
             type="text" 
             name="<?= $name ?>[to]"
-            class="mc-rangeslider-upper form-control">
+            class="mc-rangeslider-input mc-rangeslider-upper">
     </div>
 
 <?php endif ?>
