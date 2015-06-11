@@ -6,25 +6,25 @@
 name: Price
 
 # Model Form Field configuration
-form: $/macrobit/foodcatalog/models/price/fields.yaml
+form: $/macrobit/horeca/models/price/fields.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Price
+modelClass: Macrobit\Horeca\Models\Price
 
 # Default redirect location
-defaultRedirect: macrobit/foodcatalog/prices
+defaultRedirect: macrobit/horeca/prices
 
 # Create page
 create:
     title: Create Price
-    redirect: macrobit/foodcatalog/prices/update/:id
-    redirectClose: macrobit/foodcatalog/prices
+    redirect: macrobit/horeca/prices/update/:id
+    redirectClose: macrobit/horeca/prices
 
 # Update page
 update:
     title: Edit Price
-    redirect: macrobit/foodcatalog/prices
-    redirectClose: macrobit/foodcatalog/prices
+    redirect: macrobit/horeca/prices
+    redirectClose: macrobit/horeca/prices
 
 # Preview page
 preview:

@@ -10,23 +10,23 @@ tabs:
             label: ID
             disabled: true
             hidden: true
-            tab: Placement
+            tab: macrobit.horeca::lang.placement.label
         name:
             label: Name
-            tab: Placement
+            tab: macrobit.horeca::lang.placement.label
         height:
             label: Height
             default: 300
             span: left
-            tab: Placement
+            tab: macrobit.horeca::lang.placement.label
         width:
             label: Width
             default: 500
             span: right
-            tab: Placement
+            tab: macrobit.horeca::lang.placement.label
         tables:
-            label: Tables
+            label: macrobit.horeca::lang.table.label
             type: partial
             path: tables_field
-            tab: Tables
+            tab: macrobit.horeca::lang.table.label
             context: [update]

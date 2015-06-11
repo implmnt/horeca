@@ -6,6 +6,7 @@ fields:
     id:
         label: ID
         disabled: true
+        hidden: true
     tags:
-        label: Tags
+        label: macrobit.horeca::lang.field.tags
         type: mc-tagfinder

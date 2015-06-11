@@ -1,0 +1,65 @@
+<style type="text/css">
+	.map {
+		height: 240px;
+		width: 100%;
+	}
+	.map > #map {
+		height: 200px;
+		border: 1px solid #CCC;
+		overflow: hidden;
+	}
+	.map [class*="-copyright"] {
+		opacity: .8;
+	}
+</style>
+<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script type="text/javascript">
+	function init() {
+		var $input = $('#<?= $this->getId("input") ?>');
+		var placemark = null;
+		var map = new ymaps.Map('map', {
+			center: [43.03667, 44.706286],
+			controls: [],
+			zoom: 13
+		});
+		map.events.add('click', function (e) {
+			var coords = e.get('coords');
+			$input.val(JSON.stringify(coords));
+			if (placemark) {
+				placemark.geometry.setCoordinates(coords);
+			}
+			else {
+				placemark = createPlacemark(coords);
+				map.geoObjects.add(placemark);
+			}
+
+		});
+		function createPlacemark(coords) {
+			var placemark = new ymaps.Placemark(coords, {}, {
+				iconLayout: 'default#image',
+				iconImageHref: '/themes/macrobit/assets/images/map-star.png',
+				iconImageSize: [22, 21],
+				draggable: true
+			});
+			placemark.events.add('dragend', function () {
+				$input.val(JSON.stringify(placemark.geometry.getCoordinates()));
+			});
+			return placemark;
+		}
+		var coords = JSON.parse($input.val());
+		if (coords.length === 2) {
+			map.geoObjects.add(placemark = createPlacemark(coords));
+			map.setCenter(coords, 15);
+		}
+	}
+	if (window.ymaps) {
+		ymaps.ready(init);
+	}
+</script>
+<input 
+	id="<?= $this->getId('input') ?>"
+	type="text" 
+	name="Firm[<?= $field->fieldName ?>]" 
+	value="<?= $value ?>" 
+	hidden>
+<div id="map"></div>

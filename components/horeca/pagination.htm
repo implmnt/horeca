@@ -1,0 +1,13 @@
+<ul>
+    {% for i in 1..__SELF__.totalPages %}
+    <li class="{% if __SELF__.currentPage == i %}active{% endif %}">
+    	<a
+    		href="javascript:;" 
+    		data-request="onPageChanged"
+    		data-request-data="page: {{ i }}, {% if __SELF__.filter is not empty %} filter: {{ __SELF__.filter }} {% endif %}"
+    		data-request-update="'{{ __SELF__ }}::records': '#records', '{{ __SELF__ }}::pagination': '#pages'"
+    	>{{ i }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<span>Всего {{ __SELF__.totalRecords }}</span>

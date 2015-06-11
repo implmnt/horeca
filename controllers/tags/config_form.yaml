@@ -6,25 +6,25 @@
 name: Tag
 
 # Model Form Field configuration
-form: $/macrobit/foodcatalog/models/tag/fields.yaml
+form: $/macrobit/horeca/models/tag/fields.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Tag
+modelClass: Macrobit\Horeca\Models\Tag
 
 # Default redirect location
-defaultRedirect: macrobit/foodcatalog/tags
+defaultRedirect: macrobit/horeca/tags
 
 # Create page
 create:
     title: Create Tag
-    redirect: macrobit/foodcatalog/tags/update/:id
-    redirectClose: macrobit/foodcatalog/tags
+    redirect: macrobit/horeca/tags/update/:id
+    redirectClose: macrobit/horeca/tags
 
 # Update page
 update:
     title: Edit Tag
-    redirect: macrobit/foodcatalog/tags
-    redirectClose: macrobit/foodcatalog/tags
+    redirect: macrobit/horeca/tags
+    redirectClose: macrobit/horeca/tags
 
 # Preview page
 preview:

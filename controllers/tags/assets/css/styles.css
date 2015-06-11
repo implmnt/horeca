@@ -1,0 +1,11 @@
+.mc-tags-table-cell {
+    font-size: 14px;
+}
+.mc-tags-control {
+    width: 600px;
+}
+
+.mc-tags-control input {
+    width: 510px;
+    height: 35px;
+}

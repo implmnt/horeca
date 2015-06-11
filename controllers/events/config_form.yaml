@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Event
+
+# Model Form Field configuration
+form: $/macrobit/horeca/models/event/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\Horeca\Models\Event
+
+# Default redirect location
+defaultRedirect: macrobit/horeca/events
+
+# Create page
+create:
+    title: Create Event
+    redirect: macrobit/horeca/events/update/:id
+    redirectClose: macrobit/horeca/events
+
+# Update page
+update:
+    title: Edit Event
+    redirect: macrobit/horeca/events
+    redirectClose: macrobit/horeca/events
+
+# Preview page
+preview:
+    title: Preview Event

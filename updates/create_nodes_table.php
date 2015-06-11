@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\Updates;
+<?php namespace Macrobit\Horeca\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -8,7 +8,7 @@ class CreateNodesTable extends Migration
 
     public function up()
     {
-        Schema::create('macrobit_foodcatalog_nodes', function($table)
+        Schema::create('macrobit_horeca_nodes', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -20,7 +20,7 @@ class CreateNodesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('macrobit_foodcatalog_node_tags', function($table)
+        Schema::create('macrobit_horeca_node_tags', function($table)
         {
             $table->engine = 'InnoDB';
             $table->integer('tag_id')->unsigned();
@@ -32,8 +32,8 @@ class CreateNodesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('macrobit_foodcatalog_nodes');
-        Schema::dropIfExists('macrobit_foodcatalog_node_tags');
+        Schema::dropIfExists('macrobit_horeca_nodes');
+        Schema::dropIfExists('macrobit_horeca_node_tags');
     }
 
 }

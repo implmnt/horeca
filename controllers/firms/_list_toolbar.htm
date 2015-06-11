@@ -1,9 +1,9 @@
-<? if ($this->user->hasAccess('macrobit.foodcatalog.access_manage_firms')): ?>
+<? if ($this->user->hasAccess('macrobit.horeca.manager')): ?>
 <div data-control="toolbar">
     <a
-        href="<?= Backend::url('macrobit/foodcatalog/firms/create') ?>"
+        href="<?= Backend::url('macrobit/horeca/firms/create') ?>"
         class="btn btn-primary oc-icon-plus">
-        New Firm
+        <?= e(trans('macrobit.horeca::lang.firm.new')); ?>
     </a>
 </div>
 <? endif ?>

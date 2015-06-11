@@ -1,6 +1,6 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('macrobit/foodcatalog/placements') ?>">Placements</a></li>
+        <li><a href="<?= Backend::url('macrobit/horeca/placements') ?>">Placements</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
@@ -33,7 +33,7 @@
                     Create and Close
                 </button>
                 <span class="btn-text">
-                    or <a href="<?= Backend::url('macrobit/foodcatalog/placements') ?>">Cancel</a>
+                    or <a href="<?= Backend::url('macrobit/horeca/placements') ?>">Cancel</a>
                 </span>
             </div>
         </div>
@@ -43,6 +43,6 @@
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('macrobit/foodcatalog/placements') ?>" class="btn btn-default">Return to placements list</a></p>
+    <p><a href="<?= Backend::url('macrobit/horeca/placements') ?>" class="btn btn-default">Return to placements list</a></p>
 
 <?php endif ?>

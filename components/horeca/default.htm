@@ -1,0 +1,9 @@
+{% partial __SELF__ ~ '::filter' %}
+<div class="rests">
+    <div id="pages" class="pagination">
+    	{% partial __SELF__ ~ '::pagination' %}
+    </div>
+    <ul id="records" class="items wrap left-xl">
+    	{% partial __SELF__ ~ '::records' %}
+    </ul>
+</div>

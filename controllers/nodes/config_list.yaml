@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/macrobit/foodcatalog/models/node/columns.yaml
+list: $/macrobit/horeca/models/node/columns.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Node
+modelClass: Macrobit\Horeca\Models\Node
 
 # List Title
 title: Manage Nodes
 
 # Link URL for each record
-recordUrl: macrobit/foodcatalog/nodes/update/:id
+recordUrl: macrobit/horeca/nodes/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
@@ -46,3 +46,12 @@ toolbar:
     # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt
+        
+# Filter configuration
+filter: 
+    scopes:
+        firm:
+            label: Firm
+            modelClass: Macrobit\Horeca\Models\Firm
+            nameFrom: name
+            conditions: firm_id in (:filtered)

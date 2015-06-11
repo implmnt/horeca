@@ -1,0 +1,5 @@
+{% put scripts %}
+<script type="text/javascript" src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+{% endput %}
+{% scripts %}
+<div id="map-canvas" data-coords='{{ __SELF__.coordinates }}'></div>

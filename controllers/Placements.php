@@ -1,10 +1,9 @@
-<?php namespace Macrobit\FoodCatalog\Controllers;
+<?php namespace Macrobit\Horeca\Controllers;
 
 use BackendMenu, Response, View;
 use Backend\Classes\Controller;
-use Macrobit\FoodCatalog\Models\Placement;
-use Macrobit\FoodCatalog\Models\Table;
-use Macrobit\FoodCatalog\Classes\AccessService;
+use Macrobit\Horeca\Models\Placement as PlacementModel;
+use Macrobit\Horeca\Models\Table as TableModel;
 
 
 /**
@@ -12,6 +11,8 @@ use Macrobit\FoodCatalog\Classes\AccessService;
  */
 class Placements extends Controller
 {
+    use \Macrobit\Horeca\Traits\Security;
+    
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
@@ -26,44 +27,26 @@ class Placements extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Macrobit.FoodCatalog', 'foodcatalog', 'placements');
+        BackendMenu::setContext('Macrobit.Horeca', 'horeca', 'placements');
 
         $this->loadAssets();
     }
 
     public function loadAssets()
     {
-        $this->addCss('/plugins/macrobit/foodcatalog/assets/css/macrobit.tablesarranger.css');
-        $this->addJs('/plugins/macrobit/foodcatalog/assets/vendor/jquery-ui/jquery-ui.min.js');
-        $this->addJs('/plugins/macrobit/foodcatalog/assets/js/macrobit.tablesarranger.js');
-    }
-
-    public function listExtendQuery($query)
-    {
-       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
-            $query->whereHas('firm', function($q)
-            {
-                $q->where('id', '=', $this->user->firm->id);   
-            });
-       }
-    }
-
-    public function formExtendQuery($query)
-    {
-       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
-            $query->whereHas('firm', function($q)
-            {
-                $q->where('id', '=', $this->user->firm->id);   
-            });
-       }
+        $this->addCss('/plugins/macrobit/horeca/assets/css/macrobit.tablesarranger.css');
+        $this->addJs('/plugins/macrobit/horeca/assets/vendor/jquery-ui/jquery-ui.min.js');
+        $this->addJs('/plugins/macrobit/horeca/assets/js/macrobit.tablesarranger.js');
     }
 
     public function update($recordId, $context = null)
     {
-        if (AccessService::noFirmsAssigned()) 
-            return Response::make(View::make('macrobit.foodcatalog::no_firm_assigned'), 403);
+        if (!$this->hasBusiness()) {
+            BackendAuth::logout();
+            return Response::make(View::make('backend::access_denied'), 403);
+        }
 
-        $this->vars['placement'] = ($placement = Placement::find($recordId));
+        $this->vars['placement'] = ($placement = PlacementModel::find($recordId));
         $this->vars['tables'] = $placement->tables;
 
         return $this->asExtension('FormController')->update($recordId, $context);
@@ -71,8 +54,10 @@ class Placements extends Controller
 
     public function index()
     {
-        if (AccessService::noFirmsAssigned()) 
-            return Response::make(View::make('macrobit.foodcatalog::no_firm_assigned'), 403);
+        if (!$this->hasBusiness()) {
+            BackendAuth::logout();
+            return Response::make(View::make('backend::access_denied'), 403);
+        }
 
         $this->asExtension('ListController')->index();
     }
@@ -84,13 +69,13 @@ class Placements extends Controller
         {
             foreach ($tablesData as $tableJson) {
                 $tableData = json_decode($tableJson);
-                $table = Table::find($tableData->id);
+                $table = TableModel::find($tableData->id);
                 $table->position = $tableData->position;
                 $table->save();
             }
         }
         $result = $this->asExtension('FormController')->update_onSave($recordId);
-        if (!$redirect = $this->makeRedirect('update', ($placement = Placement::find($recordId)))) {
+        if (!$redirect = $this->makeRedirect('update', ($placement = PlacementModel::find($recordId)))) {
             $result['#tables-arranger-container'] = $this->makePartial('tables_arranger', 
                 ['placement' => $placement, 'tables' => $placement->tables]);
 
@@ -106,7 +91,7 @@ class Placements extends Controller
         $result = $this->asExtension('RelationController')->
             onRelationButtonDelete($recordId, $context);
         $result['#tables-arranger-container'] = $this->makePartial('tables_arranger', 
-            ['placement' => ($placement = Placement::find($recordId)), 'tables' => $placement->tables]);
+            ['placement' => ($placement = PlacementModel::find($recordId)), 'tables' => $placement->tables]);
         return $result;
     }    
 
@@ -118,7 +103,7 @@ class Placements extends Controller
         $result = $this->asExtension('RelationController')->
             onRelationManageCreate($recordId, $context);
         $result['#tables-arranger-container'] = $this->makePartial('tables_arranger', 
-            ['placement' => ($placement = Placement::find($recordId)), 'tables' => $placement->tables]);
+            ['placement' => ($placement = PlacementModel::find($recordId)), 'tables' => $placement->tables]);
         return $result;
     }
 
@@ -130,7 +115,14 @@ class Placements extends Controller
         $result = $this->asExtension('RelationController')->
             onRelationManageUpdate($recordId, $context);
         $result['#tables-arranger-container'] = $this->makePartial('tables_arranger', 
-            ['placement' => ($placement = Placement::find($recordId)), 'tables' => $placement->tables]);
+            ['placement' => ($placement = PlacementModel::find($recordId)), 'tables' => $placement->tables]);
         return $result;
+    }
+
+    private function hasBusiness()
+    {
+        if (!$this->user->hasAnyAccess(['macrobit.horeca.manager']) 
+            && $this->user->firm == null) return false;
+        return true;
     }
 }

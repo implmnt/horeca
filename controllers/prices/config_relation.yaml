@@ -1,0 +1,15 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+comments:
+    label: macrobit.horeca::lang.field.comments
+    view:
+        toolbarButtons: create|delete
+        list:
+            columns:
+                content: macrobit.horeca::lang.field.content
+    manage:
+        showSearch: true
+        list: ~/plugins/macrobit/horeca/models/comment/columns.yaml
+        form: ~/plugins/macrobit/horeca/models/comment/fields.yaml

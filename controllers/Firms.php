@@ -1,9 +1,8 @@
-<?php namespace Macrobit\FoodCatalog\Controllers;
+<?php namespace Macrobit\Horeca\Controllers;
 
-use BackendMenu, Redirect, Flash, View, Response;
+use BackendMenu, BackendAuth, Redirect, Flash, View, Response;
 use Backend\Classes\Controller;
-use Macrobit\FoodCatalog\Models\Firm;
-use Macrobit\FoodCatalog\Classes\AccessService;
+use Macrobit\Horeca\Models\Firm;
 
 /**
  * Firms Back-end Controller
@@ -17,42 +16,54 @@ class Firms extends Controller
         'Backend.Behaviors.RelationController'
     ];
 
-    public $requiredPermissions = ['macrobit.foodcatalog.access_manage_firms', 'macrobit.foodcatalog.access_firms'];
+    public $requiredPermissions = ['macrobit.horeca.manager', 'macrobit.horeca.operator'];
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
 
+    public $bodyClass = 'compact-container';
+
     public function __construct()
     {
         parent::__construct();
 
-        BackendMenu::setContext('Macrobit.FoodCatalog', 'foodcatalog', 'firms');
+        BackendMenu::setContext('Macrobit.Horeca', 'horeca', 'firms');
     }
 
     public function index()
     {
-        if (AccessService::noFirmsAssigned()) 
-            return Response::make(View::make('macrobit.foodcatalog::no_firm_assigned'), 403);
-        else if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
-            return Redirect::to('backend/macrobit/foodcatalog/firms/update/' . $this->user->firm->id);
+        if (!$this->hasBusiness()) {
+            BackendAuth::logout();
+            return Response::make(View::make('backend::access_denied'), 403);
+        }
+        else if (!$this->user->hasAnyAccess(['macrobit.horeca.manager'])) {
+            return Redirect::to('backend/macrobit/horeca/firms/update/' . $this->user->firm->id);
+        }
 
         $this->asExtension('ListController')->index();
     }
 
     public function listExtendQuery($query)
     {
-       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
-            $query->whereHas('users', function($q)
-            {
-                $q->where('id', '=', $this->user->id);
-            });  
-       }
+       $this->extendQuery($query);
     }    
 
     public function formExtendQuery($query)
     {
-       if (!$this->user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms'])) {
+        $this->extendQuery($query);
+    }
+
+    private function hasBusiness()
+    {
+        if (!$this->user->hasAnyAccess(['macrobit.horeca.manager']) 
+            && $this->user->firm == null) return false;
+        return true;
+    }
+
+    private function extendQuery($query)
+    {
+       if (!$this->user->hasAnyAccess(['macrobit.horeca.manager'])) {
             $query->whereHas('users', function($q)
             {
                 $q->where('id', '=', $this->user->id);

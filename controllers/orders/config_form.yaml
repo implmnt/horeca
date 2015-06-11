@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Order
+
+# Model Form Field configuration
+form: $/macrobit/horeca/models/order/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\Horeca\Models\Order
+
+# Default redirect location
+defaultRedirect: macrobit/horeca/orders
+
+# Create page
+create:
+    title: Create Order
+    redirect: macrobit/horeca/orders/update/:id
+    redirectClose: macrobit/horeca/orders
+
+# Update page
+update:
+    title: Edit Order
+    redirect: macrobit/horeca/orders
+    redirectClose: macrobit/horeca/orders
+
+# Preview page
+preview:
+    title: Preview Order

@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\Updates;
+<?php namespace Macrobit\Horeca\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -8,20 +8,24 @@ class CreateFirmsTable extends Migration
 
     public function up()
     {
-        Schema::create('macrobit_foodcatalog_firms', function($table)
+        Schema::create('macrobit_horeca_firms', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
+            $table->integer('avg_bill')->nullable();
             $table->string('day_activity_period')->nullable();
+            $table->string('day_break_period')->nullable();
+            $table->string('holydays')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('address');
             $table->string('phone');
             $table->string('url');
+            $table->string('map_point')->default('[]');
             $table->timestamps();
         });
 
-        Schema::create('macrobit_foodcatalog_firm_tags', function($table)
+        Schema::create('macrobit_horeca_firm_tags', function($table)
         {
             $table->engine = 'InnoDB';
             $table->integer('tag_id')->unsigned();
@@ -39,12 +43,15 @@ class CreateFirmsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('macrobit_foodcatalog_firms');
-        Schema::dropIfExists('macrobit_foodcatalog_firm_tags');
-        Schema::table('backend_users', function($table)
+        Schema::dropIfExists('macrobit_horeca_firms');
+        Schema::dropIfExists('macrobit_horeca_firm_tags');
+        if(Schema::hasColumn('backend_users', 'firm_id'))
         {
-            $table->dropColumn('firm_id');
-        });
+            Schema::table('backend_users', function($table)
+            {
+                $table->dropColumn('firm_id');
+            });
+        }
     }
 
 }

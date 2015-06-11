@@ -6,11 +6,18 @@ columns:
     id:
         label: ID
         searchable: true
+        invisible: true
     name:
-        label: Name
+        label: macrobit.horeca::lang.field.name
         searchable: true
     tags:
-        label: Tags
+        label: macrobit.horeca::lang.field.tags
         relation: tags
         select: name
         searchable: true
+    firm:
+        label: macrobit.horeca::lang.field.firm
+        relation: firm
+        select: name
+    cost:
+        label: macrobit.horeca::lang.field.cost

@@ -1,0 +1,33 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        hidden: true
+    is_active:
+        label: Active
+        type: checkbox
+        span: full
+    name:
+        label: macrobit.horeca::lang.field.name
+        span: left
+    date:
+        label: macrobit.horeca::lang.field.date
+        type: datepicker
+        mode: datetime
+    description:
+        label: macrobit.horeca::lang.field.description
+        type: richeditor
+        size: huge
+
+secondaryTabs:
+    fields:
+        images:
+            label: macrobit.horeca::lang.field.images
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260

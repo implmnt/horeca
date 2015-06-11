@@ -1,0 +1,35 @@
+<div class="filter">
+	<div class="tag">Подробный поиск</div>
+	<div id="map" class="map">
+		{% partial __SELF__ ~ '::map' %}
+	</div>
+	<form 
+		data-request="{{ __SELF__ }}::onSearch"
+		data-request-update="'{{ __SELF__ }}::records': '#records', '{{ __SELF__ }}::pagination': '#pages'"
+		class="params wrap left-xl"
+	>
+		<div class="item kitchens xl-1-2">
+			<div class="heading">Кухни</div>
+			<div class="body">
+				<div class="chboxes wrap left-xl">
+					{% for tag in __SELF__.tags %}
+						<label class="chbox xl-1-2"><input type="checkbox" value="{{ tag.id }}" name="checkedTags[]"><span>{{ tag.name }}</span></label>
+					{% endfor %}
+				</div>
+				<!-- <button class="more">Еще</button> -->
+			</div>
+			<div class="bottom-bar">
+				<button class="more">Больше записей</button>
+			</div>
+		</div>
+		<div class="item avg-cost xl-1-2">
+			<div class="heading">Средний чек</div>
+			<div class="body">
+				<input type="hidden" class="range-slider" name="avgBill" value="0,2000" />
+			</div>
+			<div class="bottom-bar">
+				<button class="search-btn">Поиск</button>
+			</div>
+		</div>
+	</form>
+</div>

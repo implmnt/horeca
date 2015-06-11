@@ -3,42 +3,92 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
-        disabled: true
-    name:
-        label: Name
-        searchable: true
-        span: left
-    url:
-        label: URL
-        span: right
-    address:
-        label: Address
-        span: left
-    phone:
-        label: Phone
-        span: right
-    day_activity_period:
-        label: Activity Period
-        type: mc-rangeslider
-        step: 15
-        margin: 60
-        span: left
-    tags:
-        label: Tags
-        type: mc-tagfinder
-        span: right
-    image:
-        label: Image
-        type: fileupload
-        mode: image
-        imageHeight: 260
-        imageWidth: 260
-    is_active:
-        label: Active
-        type: checkbox
-    users:
-        label: Users
-        type: partial
-        path: users_field
+
+tabs:
+    fields:
+        id:
+            label: ID
+            disabled: true
+            hidden: true
+            tab: Firm
+        is_active:
+            label: macrobit.horeca::lang.field.active
+            type: checkbox
+            span: full
+            tab: Firm
+        name:
+            label: macrobit.horeca::lang.field.name
+            searchable: true
+            span: left
+            tab: Firm
+        url:
+            label: URL
+            span: right
+            tab: Firm
+        address:
+            label: macrobit.horeca::lang.field.address
+            span: left
+            tab: Firm
+        phone:
+            label: macrobit.horeca::lang.field.phone
+            span: right
+            tab: Firm
+        day_activity_period:
+            label: macrobit.horeca::lang.field.activity
+            type: mc-rangeslider
+            step: 15
+            margin: 60
+            span: left
+            tab: Activity
+        day_break_period:
+            label: macrobit.horeca::lang.field.break
+            type: mc-rangeslider
+            step: 15
+            margin: 60
+            span: right
+            tab: Activity
+        holydays:
+            label: macrobit.horeca::lang.field.holydays.label
+            type: partial
+            path: holydays_field
+            tab: Activity
+        tags:
+            label: macrobit.horeca::lang.field.tags
+            type: mc-tagfinder
+            span: right
+            tab: Firm
+        avg_bill:
+            label: macrobit.horeca::lang.field.avgbill
+            type: number
+            span: left
+            tab: Firm
+        map_point:
+            label: macrobit.horeca::lang.field.map
+            cssClass: map
+            type: partial
+            path: map_point_field
+            tab: Firm
+        users:
+            label: macrobit.horeca::lang.field.users
+            type: partial
+            path: users_field
+            tab: Users
+        comments:
+            label: macrobit.horeca::lang.field.comments
+            type: partial
+            path: comments_field
+            tab: Comments
+        prices:
+            label: macrobit.horeca::lang.field.prices
+            type: partial
+            path: prices_field
+            tab: Prices
+
+secondaryTabs:
+    fields:
+        images:
+            label: macrobit.horeca::lang.field.images
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260

@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\Updates;
+<?php namespace Macrobit\Horeca\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -8,7 +8,7 @@ class CreatePlacementsTable extends Migration
 
     public function up()
     {
-        Schema::create('macrobit_foodcatalog_placements', function($table)
+        Schema::create('macrobit_horeca_placements', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -16,13 +16,14 @@ class CreatePlacementsTable extends Migration
             $table->string('name');
             $table->integer('height')->default('300');
             $table->integer('width')->default('500');
+            $table->string('tables')->nullable();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('macrobit_foodcatalog_placements');
+        Schema::dropIfExists('macrobit_horeca_placements');
     }
 
 }

@@ -1,0 +1,13 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+prices:
+    label: macrobit.horeca::lang.field.prices
+    view:
+        toolbarButtons: add|remove
+        list: ~/plugins/macrobit/horeca/models/price/columns.yaml
+    manage:
+        showSearch: true
+        list: ~/plugins/macrobit/horeca/models/price/columns.yaml
+        form: ~/plugins/macrobit/horeca/models/price/fields.yaml

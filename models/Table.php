@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\Models;
+<?php namespace Macrobit\Horeca\Models;
 
 use Model;
 
@@ -11,7 +11,7 @@ class Table extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'macrobit_foodcatalog_tables';
+    public $table = 'macrobit_horeca_tables';
 
     /**
      * @var array Guarded fields

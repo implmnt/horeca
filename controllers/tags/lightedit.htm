@@ -1,0 +1,26 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('macrobit/horeca/nodes') ?>"><?= e(trans('macrobit.horeca::lang.misc.nodes')); ?></a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?= $toolbar->render() ?>
+
+<div class="mc-tags-control">
+    <input 
+        type="text" 
+        name="Firm[name]" 
+        value="" 
+        placeholder="Tag name..." 
+        autocomplete="off" 
+        maxlength="255">
+    <a
+        href="javascript:;"
+        class="btn btn-primary oc-icon-plus">
+        Add
+    </a>
+</div>
+<div id="records">
+    <?= $this->makePartial('lightedit_records', ['records' => $records]) ?>
+</div>

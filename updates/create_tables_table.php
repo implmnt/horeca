@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\Updates;
+<?php namespace Macrobit\Horeca\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
@@ -8,7 +8,7 @@ class CreateTablesTable extends Migration
 
     public function up()
     {
-        Schema::create('macrobit_foodcatalog_tables', function($table)
+        Schema::create('macrobit_horeca_tables', function($table)
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
@@ -21,7 +21,7 @@ class CreateTablesTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('macrobit_foodcatalog_tables');
+        Schema::dropIfExists('macrobit_horeca_tables');
     }
 
 }

@@ -1,0 +1,28 @@
+<?php
+    $week = [
+        ['id' => 0, 'label' => e(trans('macrobit.horeca::lang.field.holydays.monday'))],
+        ['id' => 1, 'label' => e(trans('macrobit.horeca::lang.field.holydays.tuesday'))],
+        ['id' => 2, 'label' => e(trans('macrobit.horeca::lang.field.holydays.wednesday'))],
+        ['id' => 3, 'label' => e(trans('macrobit.horeca::lang.field.holydays.thursday'))],
+        ['id' => 4, 'label' => e(trans('macrobit.horeca::lang.field.holydays.friday'))],
+        ['id' => 5, 'label' => e(trans('macrobit.horeca::lang.field.holydays.saturday'))],
+        ['id' => 6, 'label' => e(trans('macrobit.horeca::lang.field.holydays.sunday'))]
+    ];
+?>
+
+<?php foreach ($week as $day): ?>
+        <div class="checkbox custom-checkbox">
+            <input
+                id="<?= $this->getId('input') . $day['id']?>" 
+                type="checkbox" 
+                value="<?= $day['id'] ?>"
+                name="Firm[<?= $field->fieldName ?>][]"
+                <?php if($value && in_array($day['id'], $value)): ?>
+                checked
+                <?php endif ?>
+            >
+            <label 
+                for="<?= $this->getId('input') . $day['id'] ?>"
+            ><?= $day['label'] ?></label>
+        </div>
+<?php endforeach ?>

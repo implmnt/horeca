@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/macrobit/foodcatalog/models/firm/columns.yaml
+list: $/macrobit/horeca/models/firm/columns.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Firm
+modelClass: Macrobit\Horeca\Models\Firm
 
 # List Title
 title: Manage Firms
 
 # Link URL for each record
-recordUrl: macrobit/foodcatalog/firms/update/:id
+recordUrl: macrobit/horeca/firms/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

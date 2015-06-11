@@ -1,0 +1,37 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        hidden: true
+    payment_method:
+        label: Payment Method
+        type: relation
+        nameFrom: name
+        span: right
+    address:
+        label: macrobit.horeca::lang.field.address
+        span: left
+    date:
+        label: macrobit.horeca::lang.field.date
+        type: datepicker
+        mode: datetime
+    state:
+        label: macrobit.horeca::lang.field.status
+        type: radio
+        options:
+            0: macrobit.horeca::lang.order.notpayed
+            1: macrobit.horeca::lang.order.payed
+        span: left
+    user:
+        label: macrobit.horeca::lang.field.user
+        type: relation
+        nameFrom: username
+        span: right
+    prices:
+        label: macrobit.horeca::lang.field.prices
+        type: partial
+        path: prices_field

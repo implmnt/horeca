@@ -1,0 +1,32 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        hidden: true
+    date:
+        label: macrobit.horeca::lang.field.date
+        type: datepicker
+    content:
+        label: macrobit.horeca::lang.field.content
+        type: textarea
+        size: huge
+    state:
+        label: macrobit.horeca::lang.field.status
+        type: dropdown
+        options:
+            0: macrobit.horeca::lang.comment.notviewed
+            1: macrobit.horeca::lang.comment.viewed
+        span: right
+    rating:
+        label: macrobit.horeca::lang.field.rating.label
+        type: radio
+        options:
+            1: macrobit.horeca::lang.field.rating.bad
+            2: macrobit.horeca::lang.field.rating.good
+            3: macrobit.horeca::lang.field.rating.better
+            4: macrobit.horeca::lang.field.rating.best
+        span: left

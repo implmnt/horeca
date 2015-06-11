@@ -1,7 +1,7 @@
-<?php namespace Macrobit\FoodCatalog\Models;
+<?php namespace Macrobit\Horeca\Models;
 
 use Model, BackendAuth;
-use Macrobit\FoodCatalog\Models\Tag as TagModel;
+use Macrobit\Horeca\Models\Tag as TagModel;
 
 /**
  * Node Model
@@ -13,7 +13,7 @@ class Node extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'macrobit_foodcatalog_nodes';
+    public $table = 'macrobit_horeca_nodes';
 
     /**
      * @var array Guarded fields
@@ -31,10 +31,10 @@ class Node extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'firm' => ['Macrobit\FoodCatalog\Models\Firm']
+        'firm' => ['Macrobit\Horeca\Models\Firm']
     ];
     public $belongsToMany = [
-        'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_node_tags']
+        'tags' => ['Macrobit\Horeca\Models\Tag', 'table' => 'macrobit_horeca_node_tags']
     ];
     public $morphTo = [];
     public $morphOne = [];
@@ -45,7 +45,7 @@ class Node extends Model
     public function beforeCreate()
     {
         $user = BackendAuth::getUser();
-        if (!$user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
+        if (!$user->hasAnyAccess(['macrobit.horeca.manager']))
         {
             ($firm = $user->firm) != null && $this->firm_id = $user->firm->id;
         }

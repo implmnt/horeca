@@ -6,25 +6,25 @@
 name: Node
 
 # Model Form Field configuration
-form: $/macrobit/foodcatalog/models/node/fields.yaml
+form: $/macrobit/horeca/models/node/fields.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Node
+modelClass: Macrobit\Horeca\Models\Node
 
 # Default redirect location
-defaultRedirect: macrobit/foodcatalog/nodes
+defaultRedirect: macrobit/horeca/nodes
 
 # Create page
 create:
     title: Create Node
-    redirect: macrobit/foodcatalog/nodes/update/:id
-    redirectClose: macrobit/foodcatalog/nodes
+    redirect: macrobit/horeca/nodes/update/:id
+    redirectClose: macrobit/horeca/nodes
 
 # Update page
 update:
     title: Edit Node
-    redirect: macrobit/foodcatalog/nodes
-    redirectClose: macrobit/foodcatalog/nodes
+    redirect: macrobit/horeca/nodes
+    redirectClose: macrobit/horeca/nodes
 
 # Preview page
 preview:

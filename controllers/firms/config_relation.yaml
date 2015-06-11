@@ -3,17 +3,69 @@
 # ===================================
 
 users:
-    label: Users
+    label: macrobit.horeca::lang.field.users
     view:
         toolbarButtons: create|delete
         list:
             columns:
-                first_name: first Name
-                last_name: last Name
+                first_name: backend::lang.user.first_name
+                last_name: backend::lang.user.last_name
                 email: 
-                    label: e-mail
+                    label: backend::lang.user.email
                     searchable: true
     manage:
         showSearch: true
         list: ~/modules/backend/models/user/columns.yaml
         form: users_fields.yaml
+comments:
+    label: macrobit.horeca::lang.field.comments
+    view:
+        toolbarButtons: create|delete
+        list:
+            columns:
+                content: macrobit.horeca::lang.field.content
+    manage:
+        showSearch: true
+        list: ~/plugins/macrobit/horeca/models/comment/columns.yaml
+        form: ~/plugins/macrobit/horeca/models/comment/fields.yaml
+prices:
+    label: macrobit.horeca::lang.field.prices
+    view:
+        toolbarButtons: create|delete
+        list: ~/plugins/macrobit/horeca/models/price/columns.yaml
+    manage:
+        showSearch: true
+        list: ~/plugins/macrobit/horeca/models/price/columns.yaml
+        form: 
+            fields:
+                name:
+                    label: macrobit.horeca::lang.field.name
+                description:
+                    label: macrobit.horeca::lang.field.description
+                    type: textarea
+                    size: tiny
+                tags:
+                    label: macrobit.horeca::lang.field.tags
+                    type: mc-tagfinder
+                ingredients:
+                    label: macrobit.horeca::lang.field.ingredients
+                    type: textarea
+                    size: tiny
+                portion:
+                    label: macrobit.horeca::lang.field.portion
+                    span: left
+                cost:
+                    label: macrobit.horeca::lang.field.cost
+                    span: right
+                is_new:
+                    label: macrobit.horeca::lang.field.isnew
+                    type: checkbox
+                is_sale:
+                    label: macrobit.horeca::lang.field.specialoffer
+                    type: checkbox
+                images:
+                    label: macrobit.horeca::lang.field.images
+                    type: fileupload
+                    mode: image
+                    imageHeight: 260
+                    imageWidth: 260

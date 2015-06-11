@@ -1,0 +1,16 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        invisible: true
+    name:
+        label: macrobit.horeca::lang.field.name
+        searchable: true
+    firm:
+        label: macrobit.horeca::lang.field.firm
+        relation: firm
+        select: name

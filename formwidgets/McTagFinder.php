@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\FormWidgets;
+<?php namespace Macrobit\Horeca\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
 use Request;
@@ -12,7 +12,7 @@ class McTagFinder extends FormWidgetBase
     /**
      * {@inheritDoc}
      */
-    protected $defaultAlias = 'macrobit_foodcatalog_mc-tag_finder';
+    protected $defaultAlias = 'macrobit_horeca_mc-tag_finder';
 
     /**
      * [$models description]
@@ -55,10 +55,10 @@ class McTagFinder extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $this->addCss('vendor/magicsuggest/magicsuggest-min.css', 'Macrobit.FoodCatalog');
-        $this->addJs('vendor/magicsuggest/magicsuggest-min.js', 'Macrobit.FoodCatalog');
-        $this->addCss('css/mc-tagfinder.css', 'Macrobit.FoodCatalog');
-        $this->addJs('js/mc-tagfinder.js', 'Macrobit.FoodCatalog');
+        $this->addCss('vendor/magicsuggest/magicsuggest-min.css', 'Macrobit.Horeca');
+        $this->addJs('vendor/magicsuggest/magicsuggest-min.js', 'Macrobit.Horeca');
+        $this->addCss('css/mc-tagfinder.css', 'Macrobit.Horeca');
+        $this->addJs('js/mc-tagfinder.js', 'Macrobit.Horeca');
     }
 
     /**

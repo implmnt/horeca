@@ -6,8 +6,9 @@ columns:
     id:
         label: ID
         searchable: true
+        invisible: true
     name:
-        label: Name
+        label: macrobit.horeca::lang.field.name
         searchable: true
     type:
-        label: Type
+        label: macrobit.horeca::lang.field.type

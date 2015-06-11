@@ -1,0 +1,26 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        invisible: true
+    address:
+        label: macrobit.horeca::lang.field.address
+    payment_method:
+        label: macrobit.horeca::lang.field.payment_method
+        relation: payment_method
+        select: name
+    user:
+        label: macrobit.horeca::lang.field.user
+        relation: user
+        select: username
+    prices:
+        label: macrobit.horeca::lang.field.prices
+        relation: prices
+        select: name
+    state:
+        label: macrobit.horeca::lang.order.payed
+        type: switch

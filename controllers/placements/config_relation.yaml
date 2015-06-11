@@ -6,8 +6,8 @@ tables:
     label: Tables
     view:
         toolbarButtons: create|delete
-        list: $/macrobit/foodcatalog/models/table/columns.yaml
+        list: $/macrobit/horeca/models/table/columns.yaml
     manage:
         showSearch: true
-        list: $/macrobit/foodcatalog/models/table/columns.yaml
-        form: $/macrobit/foodcatalog/models/table/fields.yaml
+        list: $/macrobit/horeca/models/table/columns.yaml
+        form: $/macrobit/horeca/models/table/fields.yaml

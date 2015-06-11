@@ -22,7 +22,6 @@
         this.options   = options
         this.$el       = $(element)
         
-        console.log(options.tags);
         $('div', this.$el).magicSuggest({
             data: self.options.tags,
             displayField: 'value',

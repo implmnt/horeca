@@ -6,25 +6,25 @@
 name: Table
 
 # Model Form Field configuration
-form: $/macrobit/foodcatalog/models/table/fields.yaml
+form: $/macrobit/horeca/models/table/fields.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Table
+modelClass: Macrobit\Horeca\Models\Table
 
 # Default redirect location
-defaultRedirect: macrobit/foodcatalog/tables
+defaultRedirect: macrobit/horeca/tables
 
 # Create page
 create:
     title: Create Table
-    redirect: macrobit/foodcatalog/tables/update/:id
-    redirectClose: macrobit/foodcatalog/tables
+    redirect: macrobit/horeca/tables/update/:id
+    redirectClose: macrobit/horeca/tables
 
 # Update page
 update:
     title: Edit Table
-    redirect: macrobit/foodcatalog/tables
-    redirectClose: macrobit/foodcatalog/tables
+    redirect: macrobit/horeca/tables
+    redirectClose: macrobit/horeca/tables
 
 # Preview page
 preview:

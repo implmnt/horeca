@@ -6,25 +6,25 @@
 name: Placement
 
 # Model Form Field configuration
-form: $/macrobit/foodcatalog/models/placement/fields.yaml
+form: $/macrobit/horeca/models/placement/fields.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Placement
+modelClass: Macrobit\Horeca\Models\Placement
 
 # Default redirect location
-defaultRedirect: macrobit/foodcatalog/placements
+defaultRedirect: macrobit/horeca/placements
 
 # Create page
 create:
     title: Create Placement
-    redirect: macrobit/foodcatalog/placements/update/:id
-    redirectClose: macrobit/foodcatalog/placements
+    redirect: macrobit/horeca/placements/update/:id
+    redirectClose: macrobit/horeca/placements
 
 # Update page
 update:
     title: Edit Placement
-    redirect: macrobit/foodcatalog/placements
-    redirectClose: macrobit/foodcatalog/placements
+    redirect: macrobit/horeca/placements
+    redirectClose: macrobit/horeca/placements
 
 # Preview page
 preview:

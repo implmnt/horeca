@@ -1,15 +1,17 @@
-<?php namespace Macrobit\FoodCatalog;
+<?php namespace Macrobit\Horeca;
 
 use Lang;
+use Auth;
+use Route;
 use Backend;
 use BackendAuth;
-use Backend\Models\User;
-use Backend\Models\UserGroup;
+use Backend\Models\User as UserModel;
+use Backend\Models\UserGroup as UserGroupModel;
 use System\Classes\PluginBase;
-use Macrobit\FoodCatalog\Classes\RestHelper;
+use Macrobit\Horeca\Classes\RESTServiceProvider;
 
 /**
- * FoodCatalog Plugin Information File
+ * Horeca Plugin Information File
  */
 class Plugin extends PluginBase
 {
@@ -24,8 +26,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => Lang::get('macrobit.foodcatalog::lang.plugin.name'),
-            'description' => Lang::get('macrobit.foodcatalog::lang.plugin.description'),
+            'name'        => Lang::get('macrobit.horeca::lang.plugin.label'),
+            'description' => Lang::get('macrobit.horeca::lang.plugin.description'),
             'author'      => 'Macrobit',
             'icon'        => 'icon-cutlery'
         ];
@@ -39,9 +41,37 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'macrobit.foodcatalog.access_tags' => ['label' => 'Tags', 'tab' => 'Manage Food Catalog'],
-            'macrobit.foodcatalog.access_manage_firms' => ['label' => 'Manage Firms', 'tab' => 'Manage Food Catalog'],
-            'macrobit.foodcatalog.access_firms' => ['label' => 'Firms', 'tab' => 'Manage Food Catalog']
+            /**
+             * Tab Horeca
+             */
+            'macrobit.horeca.operator'  => [
+                'label' => Lang::get('macrobit.horeca::lang.plugin.permissions.operator'), 
+                'tab' => 'Horeca'
+            ],
+            'macrobit.horeca.manager'   => [
+                'label' => Lang::get('macrobit.horeca::lang.plugin.permissions.manager'), 
+                'tab' => 'Horeca'
+            ],
+
+            /**
+             * Tab Horeca REST
+             */
+            'macrobit.horeca.access_rest.get'       => [
+                'label' => 'GET', 
+                'tab' => 'Horeca REST'
+            ],
+            'macrobit.horeca.access_rest.post'      => [
+                'label' => 'POST', 
+                'tab' => 'Horeca REST'
+            ],
+            'macrobit.horeca.access_rest.delete'    => [
+                'label' => 'DELETE', 
+                'tab' => 'Horeca REST'
+            ],
+            'macrobit.horeca.access_rest.put'       => [
+                'label' => 'PUT', 
+                'tab' => 'Horeca REST'
+            ]
         ];
     }
 
@@ -53,46 +83,67 @@ class Plugin extends PluginBase
     public function registerNavigation()
     {
         return [
-            'foodcatalog' => [
-                'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.name'),
-                'url'           =>  Backend::url('macrobit/foodcatalog/firms'),
+            'horeca' => [
+                'label'         =>  Lang::get('macrobit.horeca::lang.plugin.label'),
+                'url'           =>  Backend::url('macrobit/horeca/firms'),
                 'icon'          =>  'icon-cutlery',
-                'permissions'   =>  ['macrobit.foodcatalog.*'],
-                'order'         =>  500,
+                'permissions'   =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager'],
+                
+                'sideMenu'      =>  [
 
-                'sideMenu'  =>  [
-                    'firms' =>  [
-                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.firms'),
-                        'url'           =>  Backend::url('macrobit/foodcatalog/firms'),
-                        'icon'          =>  'icon-building',
-                        'permissions'   =>  ['macrobit.foodcatalog.access_manage_firms', 'macrobit.foodcatalog.access_firms']
+                    'firm'              =>  [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.firm.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/firms'),
+                        'icon'              =>  'icon-building',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
                     ],
-                    'tags' =>  [
-                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.tags'),
-                        'url'           =>  Backend::url('macrobit/foodcatalog/tags'),
-                        'icon'          =>  'icon-tag',
-                        'permissions'   =>  ['macrobit.foodcatalog.access_tags']
+                    'tag'               =>  [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.tag.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/tags'),
+                        'icon'              =>  'icon-tag',
+                        'permissions'       =>  ['macrobit.horeca.manager']
                     ],
-                    'prices' => [
-                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.prices'),
-                        'url'           =>  Backend::url('macrobit/foodcatalog/prices'),
-                        'icon'          =>  'icon-copy',
-                        'permissions'   =>  ['macrobit.foodcatalog.*'],
-                        'order'         => 500
+                    'price'             => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.price.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/prices'),
+                        'icon'              =>  'icon-copy',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
                     ],
-                    'nodes' => [
-                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.nodes'),
-                        'url'           =>  Backend::url('macrobit/foodcatalog/nodes'),
-                        'icon'          =>  'icon-list-ul',
-                        'permissions'   =>  ['macrobit.foodcatalog.*'],
-                        'order'         => 500
+                    'node'              => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.node.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/nodes'),
+                        'icon'              =>  'icon-list-ul',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
                     ],
-                    'placements' => [
-                        'label'         =>  Lang::get('macrobit.foodcatalog::lang.plugin.controller.placements'),
-                        'url'           =>  Backend::url('macrobit/foodcatalog/placements'),
-                        'icon'          =>  'icon-square',
-                        'permissions'   =>  ['macrobit.foodcatalog.*'],
-                        'order'         => 500
+                    'placement'         => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.placement.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/placements'),
+                        'icon'              =>  'icon-square',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
+                    ],
+                    'event'             => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.event.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/events'),
+                        'icon'              =>  'icon-bell',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
+                    ],
+                    'order'             => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.order.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/orders'),
+                        'icon'              =>  'icon-shopping-cart',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
+                    ],
+                    'payment'           => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.payment.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/paymentinfos'),
+                        'icon'              =>  'icon-money',
+                        'permissions'       =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager']
+                    ],
+                    'payment_method'    => [
+                        'label'             =>  Lang::get('macrobit.horeca::lang.payment_method.label'),
+                        'url'               =>  Backend::url('macrobit/horeca/paymentmethods'),
+                        'icon'              =>  'icon-credit-card',
+                        'permissions'       =>  ['macrobit.horeca.manager']
                     ]
                 ]
             ]
@@ -102,11 +153,11 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            'Macrobit\FoodCatalog\FormWidgets\McTagFinder' => [
+            'Macrobit\Horeca\FormWidgets\McTagFinder' => [
                 'label' => 'Tag Finder',
                 'code' => 'mc-tagfinder'
             ],
-            'Macrobit\FoodCatalog\FormWidgets\McRangeSlider' => [
+            'Macrobit\Horeca\FormWidgets\McRangeSlider' => [
                 'label' => 'Range Slider',
                 'code' => 'mc-rangeslider'
             ]
@@ -116,23 +167,23 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Macrobit\FoodCatalog\Components\FirmList' => 'firmList'
+            '\Macrobit\Horeca\Components\Horeca' => 'horeca'
         ];
     }
 
     public function boot()
     {
-        User::extend(function($model) {
-            $model->belongsTo['firm'] = ['Macrobit\FoodCatalog\Models\Firm'];
+        UserModel::extend(function($model) {
+            $model->belongsTo['firm'] = ['Macrobit\Horeca\Models\Firm'];
             $model->addDynamicMethod('listGroupsForFirm', function()
             {
                 $result = [];
                 $groups = null;
-                if (($user = BackendAuth::getUser()) && (!$user->hasAccess(['macrobit.foodcatalog.access_manage_firms'])))
-                {
+                if (($user = BackendAuth::getUser()) 
+                    && (!$user->hasAccess(['macrobit.horeca.manager']))) {
                     $groups = $user->groups;
                 } else {
-                    $groups = UserGroup::all();
+                    $groups = UserGroupModel::all();
                 }
                 foreach ($groups as $group) {
                     $result[$group->id] = [$group->name, $group->description];
@@ -141,10 +192,35 @@ class Plugin extends PluginBase
             });
         });
 
-        RestHelper::init([
-            'Macrobit\FoodCatalog\Models\Firm',
-            'Macrobit\FoodCatalog\Models\Tag'
+        $rest = RESTServiceProvider::instance();
+        $rest->initialize(
+        [
+            [
+                'tags', 'Macrobit\Horeca\Models\Tag', ['GET']
+            ],
+            [
+                'firms', 'Macrobit\Horeca\Models\Firm', ['GET']
+            ],
+            [
+                'comments', 'Macrobit\Horeca\Models\Comment', ['GET']
+            ],
+            [
+                'events', 'Macrobit\Horeca\Models\Event', ['GET']
+            ],
+            [
+                'nodes', 'Macrobit\Horeca\Models\Node', ['GET']
+            ],
+            [
+                'placements', 'Macrobit\Horeca\Models\Placement', ['GET']
+            ],
+            [
+                'tables', 'Macrobit\Horeca\Models\Table', ['GET']
+            ],
+            [
+                'prices', 'Macrobit\Horeca\Models\Price', ['GET']
+            ]
         ]);
+
     }
 
 }

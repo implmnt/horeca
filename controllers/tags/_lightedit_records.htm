@@ -1,0 +1,14 @@
+<table class="table data">
+    <? foreach ($records as $record): ?>
+        <tr>
+            <td class="mc-tags-table-cell"><?= $record->name ?></td>
+            <td width="30px">
+                <a
+                    href="javascript:;"
+                    data-request="onDelete"
+                    data-request-data="id: <?= $record->id ?>"
+                >Delete</a> 
+            </td>
+        </tr>
+    <? endforeach ?>
+</table>

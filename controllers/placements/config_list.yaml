@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/macrobit/foodcatalog/models/placement/columns.yaml
+list: $/macrobit/horeca/models/placement/columns.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Placement
+modelClass: Macrobit\Horeca\Models\Placement
 
 # List Title
 title: Manage Placements
 
 # Link URL for each record
-recordUrl: macrobit/foodcatalog/placements/update/:id
+recordUrl: macrobit/horeca/placements/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
@@ -42,3 +42,12 @@ toolbar:
     # Search widget configuration
     search:
         prompt: backend::lang.list.search_prompt
+        
+# Filter configuration
+filter: 
+    scopes:
+        firm:
+            label: Firm
+            modelClass: Macrobit\Horeca\Models\Firm
+            nameFrom: name
+            conditions: firm_id in (:filtered)

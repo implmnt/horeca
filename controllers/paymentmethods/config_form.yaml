@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Payment Method
+
+# Model Form Field configuration
+form: $/macrobit/horeca/models/paymentmethod/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\Horeca\Models\PaymentMethod
+
+# Default redirect location
+defaultRedirect: macrobit/horeca/paymentmethods
+
+# Create page
+create:
+    title: Create Payment Method
+    redirect: macrobit/horeca/paymentmethods/update/:id
+    redirectClose: macrobit/horeca/paymentmethods
+
+# Update page
+update:
+    title: Edit Payment Method
+    redirect: macrobit/horeca/paymentmethods
+    redirectClose: macrobit/horeca/paymentmethods
+
+# Preview page
+preview:
+    title: Preview Payment Method

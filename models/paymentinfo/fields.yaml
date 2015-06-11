@@ -1,0 +1,28 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+        hidden: true
+    order:
+        label: macrobit.horeca::lang.field.order
+        type: recordfinder
+        list: $/macrobit/horeca/models/order/columns.yaml
+        prompt: Click the %s button to find an order
+        nameFrom: date
+        descriptionFrom: description
+    payment_method:
+        label: macrobit.horeca::lang.field.payment_method
+        type: relation
+        nameFrom: name
+    state:
+        label: macrobit.horeca::lang.field.status
+        type: radio
+        options:
+            0: macrobit.horeca::lang.order.notpayed
+            1: macrobit.horeca::lang.order.payed
+    total:
+        label: macrobit.horeca::lang.field.total

@@ -8,8 +8,8 @@ columns:
         searchable: true
         invisible: true
     name:
-        label: Name
+        label: macrobit.horeca::lang.field.name
     tags:
-        label: Tags
+        label: macrobit.horeca::lang.field.tags
         relation: tags
         select: name

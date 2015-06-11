@@ -1,4 +1,4 @@
-<?php namespace Macrobit\FoodCatalog\Models;
+<?php namespace Macrobit\Horeca\Models;
 
 use Model, BackendAuth;
 
@@ -11,12 +11,19 @@ class Placement extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'macrobit_foodcatalog_placements';
+    public $table = 'macrobit_horeca_placements';
 
     /**
      * @var array Guarded fields
      */
     protected $guarded = ['*'];
+
+    /**
+     * @var array Jsonable fields
+     */
+    protected $jsonable = [
+        'tables'
+    ];
 
     /**
      * @var array Fillable fields
@@ -28,10 +35,10 @@ class Placement extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'tables' => ['Macrobit\FoodCatalog\Models\Table', 'key' => 'placement_id']
+        'tables' => ['Macrobit\Horeca\Models\Table', 'key' => 'placement_id']
     ];
     public $belongsTo = [
-        'firm' => ['Macrobit\FoodCatalog\Models\Firm']        
+        'firm' => ['Macrobit\Horeca\Models\Firm']
     ];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -43,10 +50,15 @@ class Placement extends Model
     public function beforeCreate()
     {
         $user = BackendAuth::getUser();
-        if (!$user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
+        if (!$user->hasAnyAccess(['macrobit.horeca.manager']))
         {
             ($firm = $user->firm) != null && $this->firm_id = $user->firm->id;
         }
+    }
+
+    public function afterDelete()
+    {
+        $this->tables()->delete();
     }
 
 }

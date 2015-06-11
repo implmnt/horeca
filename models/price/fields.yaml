@@ -1,40 +1,57 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
+tabs:
+    fields:
+        id:
+            label: ID
+            disabled: true
+            hidden: true
+            tab: Price
+        name:
+            label: macrobit.horeca::lang.field.name
+            tab: Price
+        description:
+            label: macrobit.horeca::lang.field.description
+            type: textarea
+            size: tiny
+            tab: Price
+        tags:
+            label: macrobit.horeca::lang.field.tags
+            type: mc-tagfinder
+            tab: Price
+        ingredients:
+            label: macrobit.horeca::lang.field.ingredients
+            type: textarea
+            size: tiny
+            tab: Price
+        portion:
+            label: macrobit.horeca::lang.field.portion
+            span: left
+            tab: Price
+        cost:
+            label: macrobit.horeca::lang.field.cost
+            span: right
+            tab: Price
+        is_new:
+            label: macrobit.horeca::lang.field.isnew
+            type: checkbox
+            tab: Price
+        is_sale:
+            label: macrobit.horeca::lang.field.specialoffer
+            type: checkbox
+            tab: Price
+        comments:
+            label: macrobit.horeca::lang.field.comments
+            type: partial
+            path: comments_field
+            tab: Comments
 
-fields:
-    id:
-        label: ID
-        disabled: true
-    name:
-        label: Name
-    description:
-        label: Description
-        type: textarea
-        size: tiny
-    images:
-        label: Images
-        type: fileupload
-        mode: image
-        imageHeight: 260
-        imageWidth: 260
-    tags:
-        label: Tags
-        type: mc-tagfinder
-    ingredients:
-        label: Ingredients
-        type: textarea
-        size: tiny
-    portion:
-        label: Portion
-        span: left
-    cost:
-        label: Cost
-        type: number
-        span: right
-    is_new:
-        label: Novelty
-        type: checkbox
-    is_sale:
-        label: Special Offer
-        type: checkbox
+secondaryTabs:
+    fields:
+        images:
+            label: macrobit.horeca::lang.field.images
+            type: fileupload
+            mode: image
+            imageHeight: 260
+            imageWidth: 260

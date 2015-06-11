@@ -1,8 +1,8 @@
 <div data-control="toolbar">
     <a
-        href="<?= Backend::url('macrobit/foodcatalog/nodes/create') ?>"
+        href="<?= Backend::url('macrobit/horeca/nodes/create') ?>"
         class="btn btn-primary oc-icon-plus">
-        New Node
+        <?= e(trans('macrobit.horeca::lang.node.new')); ?>
     </a>
     <button
         class="btn btn-default oc-icon-trash-o"
@@ -11,7 +11,7 @@
             checked: $('.control-list').listWidget('getChecked')
         })"
         data-request="onDelete"
-        data-request-confirm="<?= e(trans('macrobit.foodcatalog::lang.nodes.delete_selected_confirm')) ?>"
+        data-request-confirm="<?= e(trans('macrobit.horeca::lang.nodes.delete_selected_confirm')) ?>"
         data-trigger-action="enable"
         data-trigger=".control-list input[type=checkbox]"
         data-trigger-condition="checked"
@@ -20,8 +20,8 @@
         <?= e(trans('backend::lang.list.delete_selected')) ?>
     </button>
     <a 
-        href="<?= Backend::url('macrobit/foodcatalog/nodes/reorder') ?>" 
+        href="<?= Backend::url('macrobit/horeca/nodes/reorder') ?>" 
         class="btn btn-default oc-icon-bars">
-        <?= e(trans('macrobit.foodcatalog::lang.misc.manageorder')); ?>
+        <?= e(trans('macrobit.horeca::lang.node.manageorder')); ?>
     </a>
 </div>

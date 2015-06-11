@@ -6,25 +6,25 @@
 name: Firm
 
 # Model Form Field configuration
-form: $/macrobit/foodcatalog/models/firm/fields.yaml
+form: $/macrobit/horeca/models/firm/fields.yaml
 
 # Model Class name
-modelClass: Macrobit\FoodCatalog\Models\Firm
+modelClass: Macrobit\Horeca\Models\Firm
 
 # Default redirect location
-defaultRedirect: macrobit/foodcatalog/firms
+defaultRedirect: macrobit/horeca/firms
 
 # Create page
 create:
     title: Create Firm
-    redirect: macrobit/foodcatalog/firms/update/:id
-    redirectClose: macrobit/foodcatalog/firms
+    redirect: macrobit/horeca/firms/update/:id
+    redirectClose: macrobit/horeca/firms
 
 # Update page
 update:
     title: Edit Firm
-    redirect: macrobit/foodcatalog/firms
-    redirectClose: macrobit/foodcatalog/firms
+    redirect: macrobit/horeca/firms
+    redirectClose: macrobit/horeca/firms
 
 # Preview page
 preview:

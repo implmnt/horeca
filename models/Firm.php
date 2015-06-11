@@ -1,21 +1,26 @@
-<?php namespace Macrobit\FoodCatalog\Models;
+<?php namespace Macrobit\Horeca\Models;
 
 use Model, BackendAuth, ApplicationException;
-use Macrobit\FoodCatalog\Models\Tag as TagModel;
+use Macrobit\Horeca\Models\Tag as TagModel;
 
 /**
  * Firm Model
  */
 class Firm extends Model
-{
-    use \Macrobit\FoodCatalog\Traits\Restable;
-
-    public static $REST_PATH_NAME = 'firms';
+{    
+    use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'macrobit_foodcatalog_firms';
+    public $table = 'macrobit_horeca_firms';
+
+    /**
+     * Validation rules
+     */
+    public $rules = [
+        'name' => 'required|between:2,64|unique:macrobit_horeca_firms'
+    ];
 
     /**
      * @var array Guarded fields
@@ -38,7 +43,9 @@ class Firm extends Model
      * @var array Jsonable fields
      */
     protected $jsonable = [
-        'day_activity_period'
+        'day_activity_period',
+        'day_break_period',
+        'holydays'
     ];
 
     /**
@@ -47,22 +54,23 @@ class Firm extends Model
     public $hasOne = [];
     public $hasMany = [
         'users' => ['Backend\Models\User'],
-        'nodes' => ['Macrobit\FoodCatalog\Models\Node'],
-        'prices' => ['Macrobit\FoodCatalog\Models\Price'],
-        'placements' => ['Macrobit\FoodCatalog\Models\Placement']
+        'nodes' => ['Macrobit\Horeca\Models\Node'],
+        'prices' => ['Macrobit\Horeca\Models\Price'],
+        'placements' => ['Macrobit\Horeca\Models\Placement'],
+        'events' => ['Macrobit\Horeca\Models\Event'],
+        'comments' => ['Macrobit\Horeca\Models\Comment']
     ];
     public $belongsTo = [];
     public $belongsToMany = [
-        'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_firm_tags']
+        'tags' => ['Macrobit\Horeca\Models\Tag', 'table' => 'macrobit_horeca_firm_tags']
     ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
-    public $attachOne = [
-        'image' => ['System\Models\File']
+    public $attachOne = [];
+    public $attachMany = [
+        'images' => ['System\Models\File']
     ];
-    public $attachMany = [];
-
 
     public function beforeSave()
     {
@@ -79,10 +87,20 @@ class Firm extends Model
         }
     }
 
+    public function afterDelete()
+    {
+        $this->users()->delete();
+        $this->nodes()->delete();
+        $this->prices()->delete();
+        $this->placements()->delete();
+        $this->events()->delete();
+        $this->comments()->delete();
+        $this->images()->delete();
+    }
+
     public function getTagOptions()
     {
         return TagModel::where('type', '=', 'firm')->get();
     }
-
 
 }

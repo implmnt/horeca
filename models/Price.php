@@ -1,7 +1,7 @@
-<?php namespace Macrobit\FoodCatalog\Models;
+<?php namespace Macrobit\Horeca\Models;
 
 use Model, BackendAuth;
-use Macrobit\FoodCatalog\Models\Tag as TagModel;
+use Macrobit\Horeca\Models\Tag as TagModel;
 
 /**
  * Price Model
@@ -12,7 +12,7 @@ class Price extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'macrobit_foodcatalog_prices';
+    public $table = 'macrobit_horeca_prices';
 
     /**
      * @var array Guarded fields
@@ -22,18 +22,32 @@ class Price extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'tags',
+        'ingredients',
+        'portion',
+        'cost',
+        'is_new',
+        'is_sale',
+        'firm_id',
+        'id'
+    ];
 
     /**
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'comments' => ['Macrobit\Horeca\Models\Comment']
+    ];
     public $belongsTo = [
-        'firm' => ['Macrobit\FoodCatalog\Models\Firm']
+        'firm' => ['Macrobit\Horeca\Models\Firm']
     ];
     public $belongsToMany = [
-        'tags' => ['Macrobit\FoodCatalog\Models\Tag', 'table' => 'macrobit_foodcatalog_price_tags']
+        'tags' => ['Macrobit\Horeca\Models\Tag', 'table' => 'macrobit_horeca_price_tags'],
+        'orders' => ['Macrobit\Horeca\Models\Order', 'table' => 'macrobit_horeca_order_prices']
     ];
     public $morphTo = [];
     public $morphOne = [];
@@ -42,15 +56,6 @@ class Price extends Model
     public $attachMany = [
         'images' => ['System\Models\File']
     ];
-
-    public function beforeCreate()
-    {
-        $user = BackendAuth::getUser();
-        if (!$user->hasAnyAccess(['macrobit.foodcatalog.access_manage_firms']))
-        {
-            ($firm = $user->firm) != null && $this->firm_id = $user->firm->id;
-        }
-    }
 
     public function getTagOptions()
     {
