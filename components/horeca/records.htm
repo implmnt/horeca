@@ -1,12 +1,12 @@
 {% if __SELF__.records|length > 0 %}
     {% for record in __SELF__.records %}
-        <li class="col-1 xl-3-12 md-4-12 s-1-2">
-            <div class="image">
-                <a href="#"><img src="{{ record.image.thumb(320, auto) }}" alt="image1"></a>
+        <li class="xl-3-12 md-4-12 s-1-2">
+            <div class="item-image">
+                <a href="/firm/{{record.id}}"><img src="{{ record.image.thumb(320, auto) }}" alt="image1"></a>
             </div>
-            <div class="desc">
+            <div class="item-desc">
                 <span>{{ record.tags }}</span>
-                <h3><a href="#">{{ record.name }}</a></h3>
+                <h3><a href="/firm/{{record.id}}">{{ record.name }}</a></h3>
                 <a href="tel:{{ record.phone }}" class="tel">{{ record.phone }}</a>
                 <div class="address">{{ record.address }}</div>
             </div>

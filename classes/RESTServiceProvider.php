@@ -2,7 +2,8 @@
 
 use Route;
 use Input;
-use BackendAuth;
+use Auth;
+use ShahiemSeymor\Roles\Models\UserGroup;
 
 /**
  * REST Service Provider
@@ -34,21 +35,17 @@ class RESTServiceProvider
 
     private function makeGroupRoute()
     {
-        Route::filter('security', function($route)
-        {
-            if (!BackendAuth::check()) {
-                return 'authorization required';
-            }
-            if (!BackendAuth::getUser()->hasAnyAccess(['macrobit.horeca.access_rest.' 
-                    . strtolower($route->methods()[0])])) {
-                return 'forbidden';
-            }
-        });
-
-        Route::group(['prefix' => $this->prefix, 'before' => 'security'], function() 
+        Route::group(['prefix' => $this->prefix], function() 
         {
             $this->provideAll();
         });
+    }
+
+    private function hasAccess($class)
+    {
+        $instance = new $class;
+        return $instance->requiredPermissions ? 
+            UserGroup::can($instance->requiredPermissions) : true;
     }
 
     private function provideAll()
@@ -106,6 +103,10 @@ class RESTServiceProvider
     {
         Route::get($path, function() use ($class)
         {
+            if (!$this->hasAccess($class)) {
+                return 'forbidden';
+            }
+
             $query = $class::query();
 
             /**
@@ -154,6 +155,10 @@ class RESTServiceProvider
     {
         Route::post($path, function() use ($class)
         {
+            if (!$this->hasAccess($class)) {
+                return 'forbidden';
+            }
+
             $data = Input::all();
             $model = new $class($data);
             $model->save();
@@ -166,6 +171,10 @@ class RESTServiceProvider
     {
         Route::put($path, function() use ($class)
         {
+            if (!$this->hasAccess($class)) {
+                return 'forbidden';
+            }
+
             $data = Input::all();
             $model = $class::find($data['id']);
             $model->fill($data);
@@ -179,6 +188,10 @@ class RESTServiceProvider
     {
         Route::delete($path . '/{id}', function($id) use ($class)
         {
+            if (!$this->hasAccess($class)) {
+                return 'forbidden';
+            }
+
             $model = $class::find($id);
             $model->delete();
 

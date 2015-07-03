@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Basket
+
+# Model Form Field configuration
+form: $/macrobit/horeca/models/basket/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\Horeca\Models\Basket
+
+# Default redirect location
+defaultRedirect: macrobit/horeca/baskets
+
+# Create page
+create:
+    title: Create Basket
+    redirect: macrobit/horeca/baskets/update/:id
+    redirectClose: macrobit/horeca/baskets
+
+# Update page
+update:
+    title: Edit Basket
+    redirect: macrobit/horeca/baskets
+    redirectClose: macrobit/horeca/baskets
+
+# Preview page
+preview:
+    title: Preview Basket

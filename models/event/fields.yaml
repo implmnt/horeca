@@ -28,6 +28,7 @@ secondaryTabs:
         images:
             label: macrobit.horeca::lang.field.images
             type: fileupload
+            cssClass: no-margin-container
             mode: image
             imageHeight: 260
             imageWidth: 260

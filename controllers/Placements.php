@@ -23,6 +23,7 @@ class Placements extends Controller
     public $listConfig = 'config_list.yaml';
     public $relationConfig = 'config_relation.yaml';
 
+
     public function __construct()
     {
         parent::__construct();
@@ -58,7 +59,6 @@ class Placements extends Controller
             BackendAuth::logout();
             return Response::make(View::make('backend::access_denied'), 403);
         }
-
         $this->asExtension('ListController')->index();
     }
 

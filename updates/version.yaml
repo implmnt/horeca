@@ -1,31 +1,36 @@
 1.0.1: 
-    - Add Firm model and Firms controller
+    - Added Firm model and Firms controller
+    - create_firms_table.php
 1.0.2:
-    - Add Tag model and Tags controller 
+    - Added Tag model and Tags controller 
+    - create_tags_table.php
 1.0.3:
-    - Add Price model and Prices controller
+    - Added Price model and Prices controller
     - create_prices_table.php
 1.0.4:
-    - Add Node model and Nodes controller
+    - Added Node model and Nodes controller
     - create_nodes_table.php
 1.0.5: 
-    - Add reoder view to Nodes controller
+    - Added reoder view to Nodes controller
+    - create_nodes_table.php
 1.0.6:
-    - Add Table model and Tables controller
+    - Added Table model and Tables controller
     - create_tables_table.php
 1.0.7:
-    - Add Placement model and Placements controller
+    - Added Placement model and Placements controller
     - create_placements_table.php
 1.0.8:
-    - Add Event model and Events controller
+    - Added Event model and Events controller
     - create_events_table.php
 1.0.9:
-    - Add Comment model and Comments controller
+    - Added Comment model and Comments controller
     - create_comments_table.php
 1.0.10:
     - Update seeder
 1.0.11: 
     - Update Firm and Comment models
+    - create_firms_table.php
+    - create_comments_table.php
 1.0.12:
     - Update Tag table
     - create_tags_table.php
@@ -34,15 +39,52 @@
     - seed_all_tables.php
 1.0.14:
     - Update Firm model
+    - create_firms_table.php
 1.0.15:
-    - Add 'holydays' to Firm
+    - Added 'holydays' to Firm
     - create_firms_table.php
 1.0.16:
-    - Add PaymentMethod model
+    - Added PaymentMethod model
     - create_payment_methods_table.php
 1.0.17:
-    - Add PaymentInfo and Order models
+    - Added PaymentInfo and Order models
     - create_payment_infos_table.php
 1.0.18:
-    - Add joining table for Order and Price
+    - Added joining table for Order and Price
     - create_orders_table.php
+1.0.19:
+    - Created baskets table
+    - create_baskets_table.php
+1.0.20:
+    - Added amount column to baskets pivot table
+    - create_baskets_table.php
+1.0.21:
+    - Added amount column to orders pivot table
+    - create_orders_table.php
+1.0.22:
+    - Added status and user_id columns to tables table
+    - create_tables_table.php
+1.0.23:
+    - Added settings table
+    - create_settings_table.php
+1.0.24:
+    - Change settings table
+    - create_settings_table.php
+1.0.25:
+    - Change settings table
+    - create_settings_table.php
+1.0.25.1:
+    - Change settings table
+    - create_settings_table.php
+1.0.25.2:
+    - Change settings table
+    - create_settings_table.php
+1.0.25.3:
+    - Change settings table
+    - create_settings_table.php
+1.0.25.4:
+    - Change settings table
+    - create_settings_table.php
+1.0.25.6:
+    - Add slider joining table
+    - create_settings_table.php

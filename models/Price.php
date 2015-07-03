@@ -9,6 +9,16 @@ use Macrobit\Horeca\Models\Tag as TagModel;
 class Price extends Model
 {
 
+    public $restConfig = [
+        'path' => 'price',
+        'relations' => [
+            'images'
+        ],
+        'methods' => [
+            'GET'  => ['macrobit.horeca.access_rest.get']
+        ]
+    ];
+
     /**
      * @var string The database table used by the model.
      */
@@ -47,7 +57,8 @@ class Price extends Model
     ];
     public $belongsToMany = [
         'tags' => ['Macrobit\Horeca\Models\Tag', 'table' => 'macrobit_horeca_price_tags'],
-        'orders' => ['Macrobit\Horeca\Models\Order', 'table' => 'macrobit_horeca_order_prices']
+        'orders' => ['Macrobit\Horeca\Models\Order', 'table' => 'macrobit_horeca_order_prices'],
+        'baskets' => ['Macrobit\Horeca\Models\Basket', 'table' => 'macrobit_horeca_basket_prices']
     ];
     public $morphTo = [];
     public $morphOne = [];

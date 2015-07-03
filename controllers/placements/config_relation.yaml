@@ -6,7 +6,9 @@ tables:
     label: Tables
     view:
         toolbarButtons: create|delete
-        list: $/macrobit/horeca/models/table/columns.yaml
+        list:
+            columns:
+                name: macrobit.horeca::lang.field.name
     manage:
         showSearch: true
         list: $/macrobit/horeca/models/table/columns.yaml

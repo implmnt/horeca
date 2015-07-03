@@ -5,7 +5,7 @@
     data-height="<?= $placement->height ?>" 
     class="tables-arranger">
         <?php foreach ($tables as $table): ?>
-            <div class="tables-arranger-table">
+            <div class="tables-arranger-table btn btn-primary">
                 <span><?= $table->name ?></span>
                 <input name="tables[]" value='<?= $table ?>' hidden>
             </div>

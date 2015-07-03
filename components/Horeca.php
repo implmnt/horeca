@@ -206,6 +206,7 @@ class Horeca extends ComponentBase
             $records = [];
             foreach ($models as $model) {
                 $record = [];
+                $record['id'] = $model->id;
                 $record['tags'] = implode(', ', $model->tags()->lists('name'));
                 $record['name'] = $model->name;
                 $record['address'] = $model->address;

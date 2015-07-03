@@ -13,6 +13,8 @@ class CreateFirmsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
+            $table->string('description');
+            $table->string('email');
             $table->integer('avg_bill')->nullable();
             $table->string('day_activity_period')->nullable();
             $table->string('day_break_period')->nullable();

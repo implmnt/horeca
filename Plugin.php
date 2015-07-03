@@ -1,14 +1,20 @@
 <?php namespace Macrobit\Horeca;
 
+use App;
 use Lang;
 use Auth;
 use Route;
 use Backend;
 use BackendAuth;
-use Backend\Models\User as UserModel;
-use Backend\Models\UserGroup as UserGroupModel;
+use Backend\Models\User as BackendUser;
+use Backend\Models\UserGroup as BackendUserGroup;
+use RainLab\User\Models\User;
+use RainLab\User\Controllers\Users as UsersController;
 use System\Classes\PluginBase;
+use Illuminate\Foundation\AliasLoader;
 use Macrobit\Horeca\Classes\RESTServiceProvider;
+use Macrobit\Horeca\Classes\RESTManager;
+use Macrobit\Horeca\Models\Basket;
 
 /**
  * Horeca Plugin Information File
@@ -33,6 +39,18 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function register()
+    {
+        $alias = AliasLoader::getInstance();
+        $alias->alias('HorecaSettings', 'Macrobit\Horeca\Facades\HorecaSettings');
+
+        App::singleton('horeca.settings', function() {
+            return \Macrobit\Horeca\Models\Settings::find(1);
+        });
+
+    }
+
+
     /**
     * Returns information about permissions.
     *
@@ -45,11 +63,11 @@ class Plugin extends PluginBase
              * Tab Horeca
              */
             'macrobit.horeca.operator'  => [
-                'label' => Lang::get('macrobit.horeca::lang.plugin.permissions.operator'), 
+                'label' => Lang::get('macrobit.horeca::lang.plugin.permissions.operator'),
                 'tab' => 'Horeca'
             ],
             'macrobit.horeca.manager'   => [
-                'label' => Lang::get('macrobit.horeca::lang.plugin.permissions.manager'), 
+                'label' => Lang::get('macrobit.horeca::lang.plugin.permissions.manager'),
                 'tab' => 'Horeca'
             ],
 
@@ -57,19 +75,19 @@ class Plugin extends PluginBase
              * Tab Horeca REST
              */
             'macrobit.horeca.access_rest.get'       => [
-                'label' => 'GET', 
+                'label' => 'GET',
                 'tab' => 'Horeca REST'
             ],
             'macrobit.horeca.access_rest.post'      => [
-                'label' => 'POST', 
+                'label' => 'POST',
                 'tab' => 'Horeca REST'
             ],
             'macrobit.horeca.access_rest.delete'    => [
-                'label' => 'DELETE', 
+                'label' => 'DELETE',
                 'tab' => 'Horeca REST'
             ],
             'macrobit.horeca.access_rest.put'       => [
-                'label' => 'PUT', 
+                'label' => 'PUT',
                 'tab' => 'Horeca REST'
             ]
         ];
@@ -88,7 +106,7 @@ class Plugin extends PluginBase
                 'url'           =>  Backend::url('macrobit/horeca/firms'),
                 'icon'          =>  'icon-cutlery',
                 'permissions'   =>  ['macrobit.horeca.operator', 'macrobit.horeca.manager'],
-                
+
                 'sideMenu'      =>  [
 
                     'firm'              =>  [
@@ -150,6 +168,21 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'macrobit.horeca::lang.settings.menu_label',
+                'description' => 'macrobit.horeca::lang.settings.menu_description',
+                'category'    => 'macrobit.horeca::lang.settings.horeca',
+                'icon'        => 'icon-cutlery',
+                'url'         => Backend::url('macrobit/horeca/settings/update'),
+                'order'       => 100,
+                'permissions' => ['macrobit.horeca.manager'],
+            ]
+        ];
+    }
+
     public function registerFormWidgets()
     {
         return [
@@ -167,23 +200,25 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            '\Macrobit\Horeca\Components\Horeca' => 'horeca'
+            '\Macrobit\Horeca\Components\Horeca'     => 'horeca',
+            '\Macrobit\Horeca\Components\Basket'     => 'basket',
+            '\Macrobit\Horeca\Components\FirmDetail' => 'firm',
+            '\Macrobit\Horeca\Components\Order'      => 'order'
         ];
     }
 
     public function boot()
     {
-        UserModel::extend(function($model) {
+        BackendUser::extend(function($model){
             $model->belongsTo['firm'] = ['Macrobit\Horeca\Models\Firm'];
-            $model->addDynamicMethod('listGroupsForFirm', function()
-            {
+            $model->addDynamicMethod('listGroupsForFirm', function(){
                 $result = [];
                 $groups = null;
-                if (($user = BackendAuth::getUser()) 
+                if (($user = BackendAuth::getUser())
                     && (!$user->hasAccess(['macrobit.horeca.manager']))) {
                     $groups = $user->groups;
                 } else {
-                    $groups = UserGroupModel::all();
+                    $groups = BackendUserGroup::all();
                 }
                 foreach ($groups as $group) {
                     $result[$group->id] = [$group->name, $group->description];
@@ -192,35 +227,37 @@ class Plugin extends PluginBase
             });
         });
 
-        $rest = RESTServiceProvider::instance();
-        $rest->initialize(
-        [
-            [
-                'tags', 'Macrobit\Horeca\Models\Tag', ['GET']
-            ],
-            [
-                'firms', 'Macrobit\Horeca\Models\Firm', ['GET']
-            ],
-            [
-                'comments', 'Macrobit\Horeca\Models\Comment', ['GET']
-            ],
-            [
-                'events', 'Macrobit\Horeca\Models\Event', ['GET']
-            ],
-            [
-                'nodes', 'Macrobit\Horeca\Models\Node', ['GET']
-            ],
-            [
-                'placements', 'Macrobit\Horeca\Models\Placement', ['GET']
-            ],
-            [
-                'tables', 'Macrobit\Horeca\Models\Table', ['GET']
-            ],
-            [
-                'prices', 'Macrobit\Horeca\Models\Price', ['GET']
-            ]
-        ]);
+        User::extend(function($model){
+            $model->hasOne['basket'] = ['Macrobit\Horeca\Models\Basket'];
+        });
 
+        UsersController::extendFormFields(function($form, $model, $context){
+            if (!$model instanceof User) {
+                return;
+            }
+
+            if (!$model->exists) {
+                return;
+            }
+
+            Basket::getFromUser($model);
+
+            $form->addTabFields([
+                'basket[prices]' => [
+                    'label' => Lang::get('macrobit.horeca::lang.field.prices'),
+                    'type'  => 'partial',
+                    'path'  => '~/plugins/macrobit/horeca/controllers/baskets/_manage_prices.htm',
+                    'tab'   => Lang::get('macrobit.horeca::lang.field.basket')
+                ]
+            ]);
+        });
+
+        $restManager = RESTManager::instance();
+        $restManager->initialize(
+        [
+            'Macrobit\Horeca\Models\Firm',
+            'Macrobit\Horeca\Models\Price'
+        ]);
     }
 
 }

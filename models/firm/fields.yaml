@@ -2,8 +2,6 @@
 #  Form Field Definitions
 # ===================================
 
-fields:
-
 tabs:
     fields:
         id:
@@ -19,6 +17,16 @@ tabs:
         name:
             label: macrobit.horeca::lang.field.name
             searchable: true
+            span: left
+            tab: Firm
+        description:
+            label: macrobit.horeca::lang.field.description
+            type: textarea
+            size: tiny
+            span: left
+            tab: Firm
+        email:
+            label: macrobit.horeca::lang.field.email
             span: left
             tab: Firm
         url:
@@ -89,6 +97,7 @@ secondaryTabs:
         images:
             label: macrobit.horeca::lang.field.images
             type: fileupload
+            cssClass: no-margin-container
             mode: image
             imageHeight: 260
             imageWidth: 260

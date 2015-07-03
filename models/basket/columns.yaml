@@ -1,0 +1,12 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        invisible: true
+    user[email]:
+        label: rainlab.user::lang.user.email
+        searchable: true

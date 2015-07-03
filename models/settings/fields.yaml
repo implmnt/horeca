@@ -1,0 +1,27 @@
+# ===================================
+#  Field Definitions
+# ===================================
+
+tabs:
+    fields:
+        slider:
+            label: Slider
+            type: partial
+            path: slider_field
+            tab: Home
+        events:
+            label: Events
+            type: partial
+            path: events_field
+            tab: Home
+        payments:
+            label: Payments
+            type: checkboxlist
+            span: left
+            tab: Order
+        default_payment:
+            label: Default Payment
+            type: dropdown
+            dependsOn: payments
+            span: right
+            tab: Order

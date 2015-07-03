@@ -26,6 +26,13 @@
                 </button>
                 <button
                     type="button"
+                    data-request="onPerform"
+                    data-load-indicator="Performing Order..."
+                    class="btn btn-success">
+                    <?= e(trans('macrobit.horeca::lang.order.saveandperform')) ?>
+                </button>
+                <button
+                    type="button"
                     data-request="onSave"
                     data-request-data="close:1"
                     data-hotkey="ctrl+enter, cmd+enter"

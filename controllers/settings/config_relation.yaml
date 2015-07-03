@@ -1,0 +1,19 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+events:
+    label: Event
+    view:
+        toolbarPartial: relation_toolbar
+        list: ~/plugins/macrobit/horeca/models/event/columns.yaml
+    manage:
+        showSearch: true
+
+slider:
+    label: Event
+    view:
+        toolbarButtons: add|remove
+        list: ~/plugins/macrobit/horeca/models/event/columns.yaml
+    manage:
+        showSearch: true

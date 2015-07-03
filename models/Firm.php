@@ -10,6 +10,16 @@ class Firm extends Model
 {    
     use \October\Rain\Database\Traits\Validation;
 
+    public $restConfig = [
+        'path' => 'firm',
+        'relations' => [
+            'images'
+        ],
+        'methods' => [
+            'GET'  => ['*']
+        ]
+    ];
+
     /**
      * @var string The database table used by the model.
      */
@@ -101,6 +111,16 @@ class Firm extends Model
     public function getTagOptions()
     {
         return TagModel::where('type', '=', 'firm')->get();
+    }
+
+    public function getRating()
+    {
+        $ratings = $this->comments()->lists('rating');
+        if (sizeof($ratings) > 0) {
+            return ceil(array_sum($ratings) / sizeof($ratings) * 10) / 10;
+        } else {
+            return 0;
+        }
     }
 
 }

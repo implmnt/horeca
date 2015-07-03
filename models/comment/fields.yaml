@@ -25,8 +25,9 @@ fields:
         label: macrobit.horeca::lang.field.rating.label
         type: radio
         options:
-            1: macrobit.horeca::lang.field.rating.bad
-            2: macrobit.horeca::lang.field.rating.good
-            3: macrobit.horeca::lang.field.rating.better
-            4: macrobit.horeca::lang.field.rating.best
+            1: macrobit.horeca::lang.field.rating.verypoor
+            2: macrobit.horeca::lang.field.rating.poor
+            3: macrobit.horeca::lang.field.rating.fair
+            4: macrobit.horeca::lang.field.rating.good
+            5: macrobit.horeca::lang.field.rating.excellent
         span: left

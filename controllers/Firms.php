@@ -29,6 +29,7 @@ class Firms extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Macrobit.Horeca', 'horeca', 'firms');
+        $this->addCss('/plugins/macrobit/horeca/assets/css/macrobit.horeca.css', 'Macrobit.Horeca');
     }
 
     public function index()

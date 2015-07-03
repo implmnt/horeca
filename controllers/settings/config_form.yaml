@@ -1,0 +1,20 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Settings
+
+# Model Form Field configuration
+form: $/macrobit/horeca/models/settings/fields.yaml
+
+# Model Class name
+modelClass: Macrobit\Horeca\Models\Settings
+
+# Default redirect location
+defaultRedirect: macrobit/horeca/settings
+
+# Update page
+update:
+    title: Settings
+    redirect: macrobit/horeca/settings

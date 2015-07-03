@@ -1,37 +1,65 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
-
-fields:
-    id:
-        label: ID
-        disabled: true
-        hidden: true
-    payment_method:
-        label: Payment Method
-        type: relation
-        nameFrom: name
-        span: right
-    address:
-        label: macrobit.horeca::lang.field.address
-        span: left
-    date:
-        label: macrobit.horeca::lang.field.date
-        type: datepicker
-        mode: datetime
-    state:
-        label: macrobit.horeca::lang.field.status
-        type: radio
-        options:
-            0: macrobit.horeca::lang.order.notpayed
-            1: macrobit.horeca::lang.order.payed
-        span: left
-    user:
-        label: macrobit.horeca::lang.field.user
-        type: relation
-        nameFrom: username
-        span: right
-    prices:
-        label: macrobit.horeca::lang.field.prices
-        type: partial
-        path: prices_field
+tabs:
+    fields:
+        id:
+            label: ID
+            disabled: true
+            hidden: true
+            tab: Order
+        fullname:
+            label: macrobit.horeca::lang.field.fullname
+            span: left
+            tab: Order
+        user:
+            label: macrobit.horeca::lang.field.customer
+            type: recordfinder
+            list: $/rainlab/user/models/user/columns.yaml
+            prompt: Click the %s button to find a user
+            nameFrom: name
+            descriptionFrom: email
+            span: right
+            tab: Order
+        comment:
+            label: macrobit.horeca::lang.field.comment
+            type: textarea
+            size: tiny
+            span: full
+            tab: Order
+        address:
+            label: macrobit.horeca::lang.field.address
+            span: left
+            tab: Order
+        phone:
+            label: macrobit.horeca::lang.field.phone
+            span: right
+            tab: Order
+        payment_method:
+            label: Payment Method
+            type: relation
+            nameFrom: name
+            span: right
+            tab: Order
+        date:
+            label: macrobit.horeca::lang.field.date
+            type: datepicker
+            mode: datetime
+            span: left
+            tab: Order
+        state:
+            label: macrobit.horeca::lang.field.status
+            type: radio
+            options:
+                0: macrobit.horeca::lang.order.created
+                1: macrobit.horeca::lang.order.notpayed
+                2: macrobit.horeca::lang.order.payed
+                3: macrobit.horeca::lang.order.canceled
+            span: left
+            tab: Order
+        prices:
+            label: macrobit.horeca::lang.field.prices
+            type: partial
+            context: [update]
+            path: prices_field
+            tab: Prices

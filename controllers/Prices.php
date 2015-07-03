@@ -27,6 +27,7 @@ class Prices extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Macrobit.Horeca', 'horeca', 'prices');
+        $this->addCss('/plugins/macrobit/horeca/assets/css/macrobit.horeca.css', 'Macrobit.Horeca');
     }
 
     public function index()

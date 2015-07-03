@@ -6,8 +6,34 @@ prices:
     label: macrobit.horeca::lang.field.prices
     view:
         toolbarButtons: add|remove
-        list: ~/plugins/macrobit/horeca/models/price/columns.yaml
+        list:
+            columns:
+                name:
+                    label: macrobit.horeca::lang.field.name
+                    searchable: true
+                firm:
+                    label: macrobit.horeca::lang.field.firm
+                    relation: firm
+                    select: name
+                cost:
+                    label: macrobit.horeca::lang.field.cost
+                pivot[amount]:
+                    label: Amount
     manage:
-        showSearch: true
-        list: ~/plugins/macrobit/horeca/models/price/columns.yaml
-        form: ~/plugins/macrobit/horeca/models/price/fields.yaml
+        list:
+            columns:
+                name:
+                    label: macrobit.horeca::lang.field.name
+                    searchable: true
+                firm:
+                    label: macrobit.horeca::lang.field.firm
+                    relation: firm
+                    select: name
+                cost:
+                    label: macrobit.horeca::lang.field.cost
+    pivot:
+        form:
+            fields:
+                pivot[amount]:
+                    label: Amount
+                    default: 1

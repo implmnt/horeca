@@ -13,14 +13,14 @@ columns:
         label: macrobit.horeca::lang.field.payment_method
         relation: payment_method
         select: name
-    user:
-        label: macrobit.horeca::lang.field.user
-        relation: user
-        select: username
+    fullname:
+        label: macrobit.horeca::lang.field.customer
     prices:
         label: macrobit.horeca::lang.field.prices
         relation: prices
         select: name
+    date:
+        label: macrobit.horeca::lang.field.date
+        type: timesince
     state:
-        label: macrobit.horeca::lang.order.payed
-        type: switch
+        label: macrobit.horeca::lang.field.status

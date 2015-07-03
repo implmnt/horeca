@@ -15,6 +15,8 @@ class CreateTablesTable extends Migration
             $table->integer('placement_id');
             $table->string('name');
             $table->string('position');
+            $table->integer('status')->default(0);
+            $table->integer('user_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

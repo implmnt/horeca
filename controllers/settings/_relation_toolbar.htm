@@ -1,0 +1,28 @@
+<div data-control="toolbar" data-disposable="">
+    <a 
+        id="addButton"
+        disabled="true"
+        data-control="popup" 
+        data-size="huge" 
+        data-handler="onRelationButtonAdd" 
+        href="javascript:;" 
+        class="btn btn-sm btn-primary oc-icon-plus"
+        >Add Event</a>
+    <button 
+        class="btn btn-sm btn-default oc-icon-minus control-disabled" 
+        onclick="$(this).data('request-data', {
+            checked: $('#Settings-update-RelationController-events-view .control-list').listWidget('getChecked')
+        })" 
+        disabled="" 
+        data-request="onRelationButtonRemove" 
+        data-trigger-action="enable" 
+        data-trigger="#Settings-update-RelationController-events-view .control-list input[type=checkbox]" 
+        data-trigger-condition="checked" 
+        data-stripe-load-indicator=""
+        >Remove</button>
+    <script type="text/javascript">
+        if (<?= $this->getCount() ?> < 4) {
+            $('#addButton').removeAttr('disabled');
+        }
+    </script>
+</div>

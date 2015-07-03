@@ -1,6 +1,7 @@
 <?php namespace Macrobit\Horeca\Models;
 
 use Model;
+use Mail;
 
 /**
  * Table Model
@@ -44,7 +45,10 @@ class Table extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'user'      => ['RainLab\User\Models\User'],
+        'placement' => ['Macrobit\Horeca\Models\Placement']
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
@@ -61,6 +65,22 @@ class Table extends Model
     {
         if (is_string($this->position))
             $this->position = json_decode($this->position);
+    }
+
+    public function book($user)
+    {
+        $firm = $this->placement->firm;
+
+        $data = [
+            'user' =>   $user,
+            'table' =>  $this
+        ];
+
+
+        Mail::send('macrobit.horeca::mail.booking', $data, 
+                function($message) use ($firm) {
+            $message->to($firm->email, $firm->name);
+        });
     }
 
 }

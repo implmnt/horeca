@@ -1,15 +1,19 @@
 <?php
 
 return [
-    'plugin' =>  [
-        'label' => 'Horeca',
-        'description' => 'Horeca\'s aggregator',
-        'permissions' => [
-            'operator' => 'Operator',
-            'manager' => 'Manager'
+    'plugin'     =>  [
+        'label'         => 'Horeca',
+        'description'   => 'Horeca\'s aggregator',
+        'permissions'   => [
+            'operator'      => 'Operator',
+            'manager'       => 'Manager'
         ]
     ],
-
+    'settings'  => [
+        'menu_label'        => 'Horeca settings',
+        'menu_description'  => 'Manage plugin based settings.',
+        'horeca'            => 'Horeca'
+    ],
     'firm'      => [
         'label'         => 'Firm',
         'new'           => 'New Firm'
@@ -33,6 +37,9 @@ return [
     'placement' => [
         'label'         => 'Placement',
         'new'           => 'New Placement',
+        'placements'    => 'Placements',
+        'booking'       => 'Booking',
+        'bookedby'      => 'Booked by'
     ],
     'table'     => [
         'label'         => 'Tables'
@@ -53,9 +60,12 @@ return [
         'notviewed'     => 'Not Viewed'
     ],
     'order'     => [
-        'label'         => 'Order',
-        'notpayed'      => 'Not Payed',
-        'payed'         => 'Payed'
+        'label'             => 'Order',
+        'created'           => 'Created',
+        'canceled'          => 'Canceled',
+        'notpayed'          => 'Not Payed',
+        'payed'             => 'Payed',
+        'saveandperform'     => 'Save and Perform'
     ],
     'payment'     => [
         'label'         => 'Payment'
@@ -70,12 +80,27 @@ return [
                 'title'             => 'Page size',
                 'description'       => 'Number of elements per page',
                 'validationMessage' => 'The Page size value is required and should be integer.'
+        ],
+        'commentPageSize'      => [
+                'title'             => 'Comment Page size'
         ]
+    ],
+    'basket'    => [
+        'label'         => 'Basket',
+        'desc'          => 'Provides basket and ordering'
+    ],
+    'firmdetail'=> [
+        'label'         => 'Firm Detail',
+        'desc'          => 'Provides view for Firm'
     ],
     'field'     => [
         'name'              => 'Name',
+        'fullname'          => 'Full Name',
+        'customer'          => 'Customer',
+        'comment'           => 'Comment',
         'date'              => 'Date',
         'description'       => 'Description',
+        'email'             => 'Email',
         'images'            => 'Images',
         'image'             => 'Image',
         'firm'              => 'Firm',
@@ -88,6 +113,8 @@ return [
         'break'             => 'Break Period',
         'avgbill'           => 'Average Bill',
         'map'               => 'Map',
+        'basket'            => 'Basket',
+        'manageprices'      => 'Manage Prices',
         'users'             => 'Users',
         'user'              => 'User',
         'tables'            => 'Tables',
@@ -104,10 +131,11 @@ return [
         'comments'          => 'Comments',
         'rating'            => [
                 'label'         => 'Rating',
-                'bad'           => 'Bad',
+                'verypoor'      => 'Very Poor',
+                'poor'          => 'Poor',
+                'fair'          => 'Fair',
                 'good'          => 'Good',
-                'better'        => 'Better',
-                'best'          => 'Best'
+                'excellent'     => 'Excellent'
         ],
         'status'            => 'Status',
         'content'           => 'Content',

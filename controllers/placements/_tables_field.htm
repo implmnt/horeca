@@ -1,8 +1,8 @@
 <div>
-    <div>
+    <div class="form-group span-left">
         <?= $this->relationRender('tables') ?>
     </div>
-    <div id="tables-arranger-container">
+    <div class="form-group span-right" id="tables-arranger-container">
         <?= $this->makePartial('tables_arranger', ['tables' => $tables]) ?>
     </div>
 </div>

@@ -2,15 +2,15 @@ var MapManager = function(elementId) {
 	var self = this;
 
 	this.map = new ymaps.Map(elementId, {
-		center: [43.03667, 44.706286],
+		center: [43.03567, 44.681286],
 		controls: [],
-		zoom: 11
+		zoom: 14
 	});
 
 	this.addGeoObjects = function(items) {
 		for (var name in items) {
 			var item = items[name];
-			if (typeof item === 'string') {
+			if (typeof item === 'string' && item.length > 2) {
 				item = JSON.parse(item);
 			}
 			if (item.length === 2) {

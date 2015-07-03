@@ -24,6 +24,10 @@ comments:
         list:
             columns:
                 content: macrobit.horeca::lang.field.content
+                user: 
+                    label: macrobit.horeca::lang.field.user
+                    relation: user
+                    select: concat(name, ' ', surname)
     manage:
         showSearch: true
         list: ~/plugins/macrobit/horeca/models/comment/columns.yaml

@@ -6,5 +6,16 @@ columns:
     id:
         label: ID
         searchable: true
+        invisible: true
     name:
         label: macrobit.horeca::lang.field.name
+    placement:
+        label: macrobit.horeca::lang.placement.label
+        relation: placement
+        select: name
+    status:
+        label: macrobit.horeca::lang.field.status
+    user:
+        label: macrobit.horeca::lang.placement.bookedby
+        relation: user
+        select: concat(name, ' ', surname)

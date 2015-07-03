@@ -20,7 +20,7 @@
 
         this.$el.css({
             'height': this.$el.data('height'),
-            'width': this.$el.data('width')
+            'width': '100%' || this.$el.data('width')
         });
 
         this.$el.children('.tables-arranger-table').each(function() {
@@ -32,7 +32,11 @@
 
             function onDrag(ev, ui) {
                 data.position = ui.position;
+                data.position.left = Math.round(data.position.left / self.$el.width() * 100) + '%';
+                data.position.top = Math.round(data.position.top / self.$el.height() * 100) + '%';
+                $(this).css(data.position);
                 $field.val(JSON.stringify(data));
+                console.log($field.val());
             }
 
             $this.draggable({
